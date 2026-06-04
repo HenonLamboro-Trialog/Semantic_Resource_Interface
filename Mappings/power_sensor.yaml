@@ -1,0 +1,110 @@
+schema_name: power_measurement_device
+
+prefixes:
+  sri4all: "https://w3id.org/resonance/SRI4ALL#"
+  saref: "https://saref.etsi.org/core/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  unit: "http://qudt.org/vocab/unit/"
+
+resource:
+  id_path: resource_id
+  class:
+    prefix: saref
+    name: Sensor
+
+measurements:
+  # 1. Active Power (Keeps the nested PowerProperty layout)
+  - path: apower
+    class:
+      prefix: sri4all
+      name: PowerMeasurement
+    relation:
+      prefix: sri4all
+      name: hasPowerMeasurement
+    datatype: float
+    property:
+      prefix: sri4all
+      name: ActivePower
+    property_relation:
+      prefix: sri4all
+      name: hasPowerProperty
+    property_unit_path: apower_unit
+    unit_prefix: unit
+    constant_values:
+      - path: "apower_unit"
+        value: "KiloW"
+
+  # 2. Active Energy (Maps directly to EnergyMeasurement)
+  - path: aenergy.total
+    class:
+      prefix: sri4all
+      name: EnergyMeasurement
+    relation:
+      prefix: sri4all
+      name: hasEnergyMeasurement
+    datatype: float
+    unit_path: aenergy_unit
+    unit_prefix: unit
+    constant_values:
+      - path: "aenergy_unit"
+        value: "KiloW-HR"
+
+  # 3. Current (Maps directly to Current)
+  - path: current
+    class:
+      prefix: sri4all
+      name: Current
+    relation:
+      prefix: sri4all
+      name: hasPowerMeasurement
+    datatype: float
+    unit_path: current_unit
+    unit_prefix: unit
+    constant_values:
+      - path: "current_unit"
+        value: "Ampere"
+
+  # 4. Voltage (Maps directly to Voltage with KilloV unit)
+  - path: voltage
+    class:
+      prefix: sri4all
+      name: Voltage
+    relation:
+      prefix: sri4all
+      name: hasPowerMeasurement
+    datatype: float
+    unit_path: voltage_unit
+    unit_prefix: unit
+    constant_values:
+      - path: "voltage_unit"
+        value: "KilloV"
+
+  # 5. Temperature in Celsius
+  - path: temperature.tC
+    class:
+      prefix: sri4all
+      name: TemperatureMeasurement
+    relation:
+      prefix: sri4all
+      name: hasTemperatureMeasurement
+    datatype: float
+    unit_path: temperature.tC_unit
+    unit_prefix: unit
+    constant_values:
+      - path: "temperature.tC_unit"
+        value: "DEG_C"
+
+  # 6. Temperature in Fahrenheit
+  - path: temperature.tF
+    class:
+      prefix: sri4all
+      name: TemperatureMeasurement
+    relation:
+      prefix: sri4all
+      name: hasTemperatureMeasurement
+    datatype: float
+    unit_path: temperature.tF_unit
+    unit_prefix: unit
+    constant_values:
+      - path: "temperature.tF_unit"
+        value: "DEG_F"
