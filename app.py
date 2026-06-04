@@ -347,3 +347,13 @@ with st.expander(
             st.divider()
     else:
         st.write("No messages received yet.")
+
+
+
+# """
+# Author: Henon Mengistu Lamboro
+# Email: henon.lamboro@trialog.com
+# Created: 2026-03-19
+# updated: 2026-06-04
+# Description: Processes sensor measurements and generates RDF triples.
+# """

@@ -176,3 +176,11 @@ def semanticise_data(data, mapping, base_uri, graph=None):
                     g.add((measurement_uri, ts_pred, Literal(ts_val, datatype=ts_datatype)))
 
     return g.serialize(format="turtle")
+
+# """
+# Author: Henon Mengistu Lamboro
+# Email: henon.lamboro@trialog.com
+# Created: 2026-03-19
+# updated: 2026-06-04
+# Description: Processes sensor measurements and generates RDF triples.
+# """
