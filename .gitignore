@@ -1,0 +1,4 @@
+# Ignore local hosting/deployment configs
+hosting/
+.env
+__pycache__/
