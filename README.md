@@ -4,11 +4,11 @@
 The **SRI-Service** is a Streamlit application designed to:
 
 - Subscribe to an MQTT topic and receive incoming data (JSON or raw text)
-- Transform incoming data into **RDF (Resource Description Framework)** based on YAML mapping file
+- Transform incoming data into **RDF (Resource Description Framework)** based on RESOANNCE Ontology and SAREF using YAML mapping file
 - Publish the generated RDF to MQTT topic
 - Provide a real-time UI to monitor incoming and processed data
 
-This tool is intended for **semantic data pipelines, IoT integration, and RDF transformations**.
+This tool is intended for **semantic data pipelines, semantic resource interface, and RDF transformations**.
 
 ---
 
@@ -32,7 +32,7 @@ This tool is intended for **semantic data pipelines, IoT integration, and RDF tr
 
 ### 1. Clone the repository
 ```bash
-git clone <http://gitlab.lan.trialog.com/resonance/sri-service.git>
+git clone <https://github.com/HenonLamboro-Trialog/semantic_resource_interface_service.git>
 cd <repo-name>
 ```
 
@@ -49,7 +49,7 @@ venv\Scripts\activate           # Windows
 pip install -r requirements.txt
 ```
 
-### 3. Running the Application
+### 4. Running the Application
 ```bash
 streamlit run app.py
 ```
