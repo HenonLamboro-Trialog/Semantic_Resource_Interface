@@ -1,0 +1,4 @@
+timestamp,Electricity_consumption,District_heating_consumption,Outdoor_temperature,Indoor_temperature_measurement_point_1,Indoor_temperature_measurement_point_2,Indoor_temperature_measurement_point_3,Indoor_temperature_mean_value
+15/10/2021 00:00,13.175,15,8.525,21.125,21.25,22.325,21.56666667
+15/10/2021 01:00,12.825,14.5,8.65,21.075,21.25,22.3,21.54166667
+15/10/2021 02:00,13.35,14.85,8.825,21.1,21.25,22.275,21.54166667

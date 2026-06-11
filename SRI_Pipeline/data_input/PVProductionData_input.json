@@ -1,0 +1,29 @@
+{
+    "powerMeasurements": [
+      {
+        "value": 1500,
+        "unit": "Watt",
+        "timestamp": "2024-08-17T14:30:00Z",
+        "commodityQuantity": "ElectricPowerL1"
+      },
+      {
+        "value": 1450,
+        "unit": "Watt",
+        "timestamp": "2024-08-17T14:31:00Z",
+        "commodityQuantity": "ElectricPowerL2"
+      },
+      {
+        "value": 1480,
+        "unit": "Watt",
+        "timestamp": "2024-08-17T14:32:00Z",
+        "commodityQuantity": "ElectricPowerL3"
+      },
+      {
+        "value": 4400,
+        "unit": "Watt",
+        "timestamp": "2024-08-17T14:33:00Z",
+        "commodityQuantity": "ElectricPower3PhaseSymmetric"
+      }
+    ]
+  }
+  
