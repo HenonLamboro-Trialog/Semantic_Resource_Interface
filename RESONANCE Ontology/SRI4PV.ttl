@@ -1,0 +1,66 @@
+@prefix : <https://w3id.org/resonance/SRI4PV#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix s4ener: <https://saref.etsi.org/saref4ener/> .
+@prefix vann: <http://purl.org/vocab/vann#> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix qudt: <http://qudt.org/schema/qudt/Unit#> .
+@prefix sri4pv: <https://w3id.org/resonance/SRI4PV#> .
+@prefix sri4all: <https://w3id.org/resonance/SRI4ALL#> .
+@prefix dcterms: <http://purl.org/dc/terms#> .
+@base <https://w3id.org/resonance/SRI4PV#> .
+
+<https://w3id.org/resonance/SRI4PV#> rdf:type owl:Ontology ;
+                                      owl:versionIRI <https://w3id.org/resonance/SRI4PV-1.0#> ;
+                                      dcterms:created "2024-07-15"^^xsd:date ;
+                                      dcterms:creator <https://www.resonance-project.eu/> ;
+                                      dcterms:creator <https://www.resonance-project.eu/> , <https://www.linkedin.com/in/henon-lamboro/> ;
+                                      dcterms:issued "2025-07-15"^^xsd:date ;
+                                      dcterms:license "CC0-1.0" ;
+                                      dcterms:modified "2025-11-26"^^xsd:date ;
+                                      dcterms:rights "Copyright (c) RESONANCE Consortium"@en ;
+                                      dcterms:title "Semantic Resorce Interface For PV production Ontology"@en ;
+                                      dcterms:description: " "@en ;
+                                      vann:preferredNamespacePrefix "sri4pv" ;
+                                      vann:preferredNamespaceUri <https://w3id.org/resonance> ;
+                                      rdfs:label "sri4pv Ontology"@en ;
+                                      owl:versionInfo "v1.0" .
+
+#################################################################
+#    Classes
+#################################################################
+
+sri4pv:Photovoltaic
+    a owl:Class ;
+    rdfs:comment " Photovoltaic is a device that converts sunlight into electrical energy using semiconducting materials. " ;
+    rdfs:label "Power Value"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+sri4pv:identifier rdf:type owl:DatatypeProperty ;
+                 rdfs:comment "Unique identifier of a device" ;  
+                 rdfs:domain sri4pv:Photovoltaic;
+                 rdfs:range xsd:string ;
+                 rdfs:label "identifier" .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+
+sri4all:consistsOfPowerMeasurement rdf:type owl:ObjectProperty ;
+                    rdfs:comment "It relates the device with its power measurement " ;  
+                    rdfs:domain sri4pv:Photovoltaic ;
+                    rdfs:range sri4all:PowerMeasurement  ;
+                    rdfs:label "consists of power measurement " .
+
+

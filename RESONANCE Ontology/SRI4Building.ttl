@@ -1,0 +1,343 @@
+@prefix : <https://w3id.org/resonance/SRI4Building#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix qudt: <http://qudt.org/schema/qudt/Unit#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix vann: <http://purl.org/vocab/vann#> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix saref: <https://saref.etsi.org/core/> .
+@prefix s4ener: <https://saref.etsi.org/saref4ener/> .
+@prefix dcterms: <http://purl.org/dc/terms#> .
+@prefix sri4building: <https://w3id.org/resonance/SRI4Building#> .
+@prefix sri4all: <https://w3id.org/resonance/SRI4ALL#> .
+@base <https://w3id.org/resonance/SRI4Building#> .
+
+<https://w3id.org/resonance/SRI4Building#> rdf:type owl:Ontology ;
+                                            owl:versionIRI <https://w3id.org/resonance/SRI4Building-1.0#> ;
+                                            dcterms:created "2024-07-15"^^xsd:date ;
+                                            dcterms:creator <https://www.resonance-project.eu/> , <https://www.linkedin.com/in/henon-lamboro/> ;
+                                            dcterms:issued "2025-07-15"^^xsd:date ;
+                                            dcterms:license "CC0-1.0" ;
+                                            dcterms:modified "2025-11-26"^^xsd:date ;
+                                            dcterms:rights "Copyright (c) RESONANCE Consortium"@en ;
+                                            dcterms:title "Semantic Resource Interface for Building Ontology"@en ;
+                                            dcterms:description "The SRI4Building Ontology defines the core concepts, relationships, and attributes required to semantically describe buildings and their energy-related components within the Semantic Resource Interface (SRI) architecture. It enables interoperable representation of building assets, smart devices, energy systems, and contextual information to support monitoring, control, optimization, and demand-response services."@en ;
+                                            vann:preferredNamespacePrefix "sri4building" ;
+                                            vann:preferredNamespaceUri <https://w3id.org/resonance> ;
+                                            rdfs:label "sri4building Ontology"@en ;
+                                            owl:versionInfo "v1.0" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms#created
+dcterms:created rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#creator
+dcterms:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#issued
+dcterms:issued rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#license
+dcterms:license rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#modified
+dcterms:modified rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#rights
+dcterms:rights rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#title
+dcterms:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#description:
+dcterms:description: rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann#preferredNamespacePrefix
+vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann#preferredNamespaceUri
+vann:preferredNamespaceUri rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://w3id.org/resonance/sri4building#hasLocation
+sri4building:hasLocation rdf:type owl:ObjectProperty ;
+                         rdfs:domain sri4building:Building .
+
+
+###  https://w3id.org/resonance/sri4building#hasStatus
+sri4building:hasStatus rdf:type owl:ObjectProperty ;
+                       rdfs:domain sri4building:BuildingHeatController ,
+                                   sri4building:HeatPump ,
+                                   sri4building:HeatPumpController .
+
+
+###  https://w3id.org/resonance/sri4building#hasUnit
+sri4building:hasUnit rdf:type owl:ObjectProperty ;
+                     rdfs:domain sri4building:TemperatureMeasurement .
+
+
+###  https://w3id.org/resonance/sri4building#hasValue
+sri4building:hasValue rdf:type owl:ObjectProperty ;
+                      rdfs:domain sri4building:DistrictHeatingConsumption ,
+                                  sri4building:ElectricityConsumption ,
+                                  sri4building:TemperatureMeasurement .
+
+
+###  https://w3id.org/resonance/sri4building#isAboutCommodityQuantity
+sri4building:isAboutCommodityQuantity rdf:type owl:ObjectProperty ;
+                                      rdfs:domain sri4building:PowerMeasurement ;
+                                      rdfs:range s4ener:CommodityQuantity ;
+                                      rdfs:comment "This describes the connection between the power data and the type of commodity quantity it represents. " ;
+                                      rdfs:label "Is About Commodity Quantity" .
+
+
+###  https://w3id.org/resonance/sri4building#isMeasuredIn
+sri4building:isMeasuredIn rdf:type owl:ObjectProperty ;
+                          rdfs:domain sri4building:PowerMeasurement ;
+                          rdfs:range qudt:Unit ;
+                          rdfs:comment "This describes the connection between the power data and the type of commodity quantity it represents. " ;
+                          rdfs:label "Is About Commodity Quantity" .
+
+
+###  https://w3id.org/resonance/sri4building#measures
+sri4building:measures rdf:type owl:ObjectProperty ;
+                      rdfs:domain sri4building:TemperatureSensor ;
+                      rdfs:range sri4building:TemperatureMeasurement .
+
+###  https://w3id.org/resonance/sri4building#consistsOfPowerMeasurement
+sri4all:consistsOfPowerMeasurement rdf:type owl:ObjectProperty ;
+    rdfs:domain sri4building:BuildingDevice ;
+    rdfs:range  sri4all:PowerMeasurement .
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://w3id.org/resonance/sri4building#hasTechnicalContext
+sri4building:hasTechnicalContext rdf:type owl:DatatypeProperty ;
+                                 rdfs:domain sri4building:PowerMeasurement ;
+                                 rdfs:range xsd:string ;
+                                 rdfs:comment "This property indicates whether the power value pertains to production (e.g., PV production) or consumption. " ;
+                                 rdfs:label "Has Technical" .
+
+
+###  https://w3id.org/resonance/sri4building#hasTimestamp
+sri4building:hasTimestamp rdf:type owl:DatatypeProperty ;
+                          rdfs:domain sri4building:PowerMeasurement ;
+                          rdfs:range xsd:dateTime ;
+                          rdfs:label "Has Timestamp" .
+
+
+###  https://w3id.org/resonance/sri4building#hasValue
+sri4building:hasValue rdf:type owl:DatatypeProperty ;
+                      rdfs:domain sri4building:PowerMeasurement ;
+                      rdfs:range xsd:float .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://qudt.org/schema/qudt/Unit#Unit
+qudt:Unit rdf:type owl:Class .
+
+###  https://saref.etsi.org/saref4ener/CommodityQuantity
+s4ener:CommodityQuantity rdf:type owl:Class .
+
+
+###  https://w3id.org/resonance/sri4building#AverageIndoorTempratureMeasurement
+sri4building:AverageIndoorTempratureMeasurement rdf:type owl:Class ;
+                                                rdfs:comment "An average indoor temperature measurement is the mean temperature recorded inside a building over a specified time period. It is derived from multiple indoor temperature sensors to represent the overall indoor temprature" ;
+                                                rdfs:subClassOf sri4building:TemperatureMeasurement .
+
+
+###  https://w3id.org/resonance/sri4building#Building
+sri4building:Building rdf:type owl:Class ;
+                      rdfs:comment "A building represents a structure that provides shelter for its occupants or contents and stands in one place. The building is also used to provide a basic element within the spatial structure hierarchy for the components of a building project." ;
+                      rdfs:label "Building"@en .
+
+
+###  https://w3id.org/resonance/sri4building#BuildingAutomationSystem
+sri4building:BuildingAutomationSystem rdf:type owl:Class ;
+                                      rdfs:comment " A building automation system refers to a system component that monitor and automatically adjust the energy using technologies";
+                                      rdfs:subClassOf sri4building:BuildingDevice .
+
+
+###  https://w3id.org/resonance/sri4building#BuildingDevice
+sri4building:BuildingDevice rdf:type owl:Class ;
+                            rdfs:comment "A tangible object designed to accomplish a particular task in a building." ;
+                            rdfs:label "Building Device"@en .
+
+
+###  https://w3id.org/resonance/sri4building#BuildingHeatController
+sri4building:BuildingHeatController rdf:type owl:Class ;
+                                    rdfs:comment "A building heat controller device or system that regulates the heating within a building to maintain a desired indoor temperature " ;
+                                    rdfs:subClassOf sri4building:Controller .
+
+###  https://w3id.org/resonance/sri4building#Controller
+sri4building:Controller rdf:type owl:Class ;
+                        rdfs:comment "A controller is a device or system that manages and regulates various operational functions within a building, such as heating, ventilation, air conditioning (HVAC)." ;
+                        rdfs:subClassOf sri4building:BuildingDevice .
+
+
+###  https://w3id.org/resonance/sri4building#DistrictHeatingConsumption
+sri4building:DistrictHeatingConsumption rdf:type owl:Class ;
+                                        rdfs:comment "District heating consumption is the total amount of energy consumed by buildings within a defined district or area that is supplied through a centralized district heating system. " ;
+                                        rdfs:subClassOf sri4building:EnergyConsumption .
+
+
+###  https://w3id.org/resonance/sri4building#DistrictHeatingSystem
+sri4building:DistrictHeatingSystem rdf:type owl:Class ;
+                                   rdfs:comment "District heating system is a centralized system that supplies energy, usually hot water or steam, from a central plant to multiple buildings for heating and hot water." ;
+                                   rdfs:subClassOf sri4building:BuildingDevice .
+
+
+###  https://w3id.org/resonance/sri4building#ElectricityConsumption
+sri4building:ElectricityConsumption rdf:type owl:Class ;
+                                    rdfs:comment "Electricity consumption is the total amount of electrical energy used by a device, building, or system over a specified period." ;
+                                    rdfs:subClassOf sri4building:EnergyConsumption .
+
+
+###  https://w3id.org/resonance/sri4building#EnergyConsumption
+sri4building:EnergyConsumption rdf:type owl:Class ;
+                               rdfs:comment "Represents the consumption of energy by a system."@en .
+
+
+###  https://w3id.org/resonance/sri4building#HeatPump
+sri4building:HeatPump rdf:type owl:Class ;
+                      rdfs:comment "A Heat Pump is a device that transfers heat from one location to another, typically extracting heat from the air, ground, or water to heat or cool a building." ;
+                      rdfs:subClassOf sri4building:BuildingDevice .
+
+
+###  https://w3id.org/resonance/sri4building#HeatPumpController
+sri4building:HeatPumpController rdf:type owl:Class ;
+                                rdfs:comment " Heatpump controller regulates the operation of a heat pump, adjusting heating or cooling based on sensor data and user settings to maintain desired indoor conditions." ;
+                                rdfs:subClassOf sri4building:Controller .
+
+
+###  https://w3id.org/resonance/sri4building#IndoorTemperatureMeasurement
+sri4building:IndoorTemperatureMeasurement rdf:type owl:Class ;
+                                          rdfs:comment "Indoor temperature measurement is the recorded temperature within a building or enclosed space, typically measured by sensors" ;
+                                          rdfs:subClassOf sri4building:TemperatureMeasurement .
+
+
+###  https://w3id.org/resonance/sri4building#IndoorTemperatureSensor
+sri4building:IndoorTemperatureSensor rdf:type owl:Class ;
+                                     rdfs:comment "Indoor temperature sensor is a device that detects and measures the temperature inside a building or enclosed space." ;
+                                     rdfs:subClassOf sri4building:TemperatureSensor .
+
+
+###  https://w3id.org/resonance/sri4building#OutdoorTemperatureMeasurement
+sri4building:OutdoorTemperatureMeasurement rdf:type owl:Class ;
+                                           rdfs:comment "Outdoor temperature measurement is the recorded temperature outside a building or in an open environment." ;
+                                           rdfs:subClassOf sri4building:TemperatureMeasurement .
+
+
+###  https://w3id.org/resonance/sri4building#OutdoorTemperatureSensor
+sri4building:OutdoorTemperatureSensor rdf:type owl:Class ;
+                                      rdfs:comment "Outdoor temperature sensor is a device that detects and measures the temperature outside a building or enclosed space. " ;
+                                      rdfs:subClassOf sri4building:TemperatureSensor .
+
+
+###  https://w3id.org/resonance/sri4building#Sensor
+sri4building:Sensor rdf:type owl:Class ;
+                    rdfs:subClassOf saref:Sensor ;
+                    rdfs:comment "A sensor is a device that measures a physical quantity and converts it into a signal which can be read by an observer or by an instrument."@en ;
+                    rdfs:label "Sensor"@en ;
+                    rdfs:seeAlso "https://w3id.org/ifc/IFC4_ADD1#IfcSensor" .
+
+
+###  https://w3id.org/resonance/sri4building#TemperatureMeasurement
+sri4building:TemperatureMeasurement rdf:type owl:Class ;
+                                           rdfs:comment "Temperature measurement is the quantification of a thermal state of an environment"  .
+
+
+###  https://w3id.org/resonance/sri4building#TemperatureSensor
+sri4building:TemperatureSensor rdf:type owl:Class ;
+                               rdfs:comment " Temperature sensor is a device that detects and measures temperature." ;
+                               rdfs:subClassOf sri4building:Sensor .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://qudt.org/schema/qudt/Unit#KiloW_HR
+qudt:KiloW_HR rdf:type owl:NamedIndividual ,
+                       qudt:Unit .
+
+
+###  https://saref.etsi.org/saref4ener/ElectricPower3PhaseSymmetric
+s4ener:ElectricPower3PhaseSymmetric rdf:type owl:NamedIndividual ,
+                                             s4ener:CommodityQuantity ;
+                                    rdfs:comment "Electric power described in Watt on when power is equally shared among the three phases. Only applicable for 3 phase devices." ;
+                                    rdfs:label "Electric Power 3 Phase Symmetric"@en .
+
+
+###  https://saref.etsi.org/saref4ener/ElectricPowerL1
+s4ener:ElectricPowerL1 rdf:type owl:NamedIndividual ,
+                                s4ener:CommodityQuantity ;
+                       rdfs:comment "Electric power described in Watt on phase 1. If a device utilizes only one phase it should always use L1." ;
+                       rdfs:label "Electric Power L1"@en .
+
+
+###  https://saref.etsi.org/saref4ener/ElectricPowerL2
+s4ener:ElectricPowerL2 rdf:type owl:NamedIndividual ,
+                                s4ener:CommodityQuantity ;
+                       rdfs:comment "Electric power described in Watt on phase 2. Only applicable for 3 phase devices." ;
+                       rdfs:label "Electric Power L2"@en .
+
+
+###  https://saref.etsi.org/saref4ener/ElectricPowerL3
+s4ener:ElectricPowerL3 rdf:type owl:NamedIndividual ,
+                                s4ener:CommodityQuantity ;
+                       rdfs:comment "Electric power described in Watt on phase 3. Only applicable for 3 phase devices." ;
+                       rdfs:label "Electric Power L3"@en .
+
+
+###  https://saref.etsi.org/saref4ener/HeatFlowRate
+s4ener:HeatFlowRate rdf:type owl:NamedIndividual ,
+                             s4ener:CommodityQuantity ;
+                    rdfs:comment "Flow rate of heat carrying gas or liquid in liters per second" ;
+                    rdfs:label "Heat Flow Rate"@en .
+
+
+###  https://saref.etsi.org/saref4ener/HeatTemperature
+s4ener:HeatTemperature rdf:type owl:NamedIndividual ,
+                                s4ener:CommodityQuantity ;
+                       rdfs:comment "Heat described in degrees Celsius" ;
+                       rdfs:label "Heat Temperature"@en .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+sri4building:hasValue rdfs:label "Has Value" .

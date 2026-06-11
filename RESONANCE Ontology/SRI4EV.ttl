@@ -1,0 +1,1038 @@
+@prefix : <https://w3id.org/resonance/SRI4EV#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix vann: <http://purl.org/vocab/vann#> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix sri4ev: <https://w3id.org/resonance/SRI4EV#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dcterms: <http://purl.org/dc/terms#> .
+@base <https://w3id.org/resonance/SRI4EV#> .
+
+<https://w3id.org/resonance/SRI4EV#> rdf:type owl:Ontology ;
+                                      owl:versionIRI <https://w3id.org/resonance/SRI4EV-1.0#> ;
+                                      dcterms:created "2024-07-15"^^xsd:date ;
+                                      dcterms:creator <https://www.resonance-project.eu/> , <https://www.linkedin.com/in/henon-lamboro/>  ;
+                                      dcterms:contributor <https://www.linkedin.com/in/ana%C3%AFs-walle-050baa159/> ;
+                                      dcterms:contributor <https://www.linkedin.com/in/ahcene-dahmane-521755198/> ;
+                                      dcterms:issued "2025-07-15"^^xsd:date ;
+                                      dcterms:license "CC0-1.0" ;
+                                      dcterms:modified "2025-11-26"^^xsd:date ;
+                                      dcterms:rights "Copyright (c) RESONANCE Consortium"@en ;
+                                      dcterms:title "Semantic Resource Interface For Electric Vehicle Ontology"@en ;
+                                      dcterms:description: """This ontology models the Electric Vehicle ecosystem, including infrastructure, 
+                                      operations, and related data. It defines entities like charging sessions, batteries, connectors, and supply equipments,
+                                      enabling seamless data integration and interoperability in EV related systems."""@en ;
+                                      vann:preferredNamespacePrefix "sri4ev" ;
+                                      vann:preferredNamespaceUri <https://w3id.org/resonance> ;
+                                      rdfs:label "sri4ev Ontology"@en ;
+                                      owl:versionInfo "v1.0" .
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+#    Object Properties
+
+###  https://w3id.org/resonance/sri4ev#belongsToChargingProfile
+sri4ev:belongsToChargingProfile rdf:type owl:ObjectProperty ;
+                                rdfs:domain sri4ev:ChargingSchedule ;
+                                rdfs:range sri4ev:ChargingProfile .
+
+###  https://w3id.org/resonance/sri4ev#belongsToChargingSchedule
+sri4ev:belongsToChargingSchedule rdf:type owl:ObjectProperty ;
+                                 owl:inverseOf sri4ev:containsChargingSchedulePeriod ;
+                                 rdfs:domain sri4ev:ChargingSchedulePeriod ;
+                                 rdfs:range sri4ev:ChargingSchedule .
+###  https://w3id.org/resonance/sri4ev#belongsToEV
+sri4ev:belongsToEV rdf:type owl:ObjectProperty ;
+                   owl:inverseOf sri4ev:consistOfEVBattery ;
+                   rdfs:domain sri4ev:ElectricVehicleBattery ;
+                   rdfs:range sri4ev:ElectricVehicle .
+###  https://w3id.org/resonance/sri4ev#belongsToStation
+sri4ev:belongsToStation rdf:type owl:ObjectProperty ;
+                        rdfs:domain sri4ev:ChargingSession ;
+                        rdfs:range sri4ev:ElectricVehicleChargingStation .
+
+###  https://w3id.org/resonance/sri4ev#consistOfEVBattery
+sri4ev:consistOfEVBattery rdf:type owl:ObjectProperty ;
+                          rdfs:domain sri4ev:ElectricVehicle ;
+                          rdfs:range sri4ev:ElectricVehicleBattery .
+
+###  https://w3id.org/resonance/sri4ev#consistsOfConnector
+sri4ev:consistsOfConnector rdf:type owl:ObjectProperty ;
+                           owl:inverseOf sri4ev:isPartOfEVSE ;
+                           rdfs:domain sri4ev:ElectricVehicleSupplyEquipment ;
+                           rdfs:range sri4ev:ElectricVehicleSupplyEquipmentConnector .
+
+###  https://w3id.org/resonance/sri4ev#consistsOfEVCS
+sri4ev:consistsOfEVCS rdf:type owl:ObjectProperty ;
+                      owl:inverseOf sri4ev:isPartOfPool ;
+                      rdfs:domain sri4ev:ElectricVehicleChargingStationPool ;
+                      rdfs:range sri4ev:ElectricVehicleChargingStation .
+
+###  https://w3id.org/resonance/sri4ev#consistsOfEVSE
+sri4ev:consistsOfEVSE rdf:type owl:ObjectProperty ;
+                      owl:inverseOf sri4ev:isPartOfStation ;
+                      rdfs:domain sri4ev:ElectricVehicleChargingStation ;
+                      rdfs:range sri4ev:ElectricVehicleSupplyEquipment .
+
+###  https://w3id.org/resonance/sri4ev#containsChargingProfile
+sri4ev:containsChargingProfile rdf:type owl:ObjectProperty ;
+                               owl:inverseOf sri4ev:isAppliedOnChargingSession ;
+                               rdfs:domain sri4ev:ChargingSession ;
+                               rdfs:range sri4ev:ChargingProfile .
+
+###  https://w3id.org/resonance/sri4ev#containsChargingSchedulePeriod
+sri4ev:containsChargingSchedulePeriod rdf:type owl:ObjectProperty ;
+                                      rdfs:domain sri4ev:ChargingSchedule ;
+                                      rdfs:range sri4ev:ChargingSchedulePeriod .
+
+###  https://w3id.org/resonance/sri4ev#containsInformationAboutChargingSchedulePeriod
+sri4ev:containsInformationAboutChargingSchedulePeriod rdf:type owl:ObjectProperty ;
+                                                      rdfs:domain sri4ev:PowerMeasurmentsResponseCommand ;
+                                                      rdfs:range sri4ev:ChargingSchedulePeriod .
+
+###  https://w3id.org/resonance/sri4ev#containsInformationAboutChargingSession
+sri4ev:containsInformationAboutChargingSession rdf:type owl:ObjectProperty ;
+                                               rdfs:domain sri4ev:ChargingSessionsResponseCommand ;
+                                               rdfs:range sri4ev:ChargingSession .
+
+###  https://w3id.org/resonance/sri4ev#containsInformationAboutEVCS
+sri4ev:containsInformationAboutEVCS rdf:type owl:ObjectProperty ;
+                                    rdfs:domain sri4ev:CurrentInfrastructureDataResponsCommand ;
+                                    rdfs:range sri4ev:ElectricVehicleChargingStation .
+
+###  https://w3id.org/resonance/sri4ev#containsInformationAboutEVSE
+sri4ev:containsInformationAboutEVSE rdf:type owl:ObjectProperty ;
+                                    rdfs:domain sri4ev:CurrentInfrastructureDataResponsCommand ;
+                                    rdfs:range sri4ev:ElectricVehicleSupplyEquipment .
+
+###  https://w3id.org/resonance/sri4ev#containsInformationAboutEVSEC
+sri4ev:containsInformationAboutEVSEC rdf:type owl:ObjectProperty ;
+                                     rdfs:domain [ rdf:type owl:Class ;
+                                                   owl:unionOf ( sri4ev:CurrentConnectorsStatusResponseCommand
+                                                                 sri4ev:CurrentInfrastructureDataResponsCommand
+                                                               )
+                                                 ] ;
+                                     rdfs:range sri4ev:ElectricVehicleSupplyEquipmentConnector .
+
+###  https://w3id.org/resonance/sri4ev#hasChargingPeriodProperty
+sri4ev:hasChargingPeriodProperty rdf:type owl:ObjectProperty ;
+                                 rdfs:domain sri4ev:ChargingSchedule ;
+                                 rdfs:range sri4ev:ChargingPeriodProperty .
+
+###  https://w3id.org/resonance/sri4ev#hasChargingProfile
+sri4ev:hasChargingProfile rdf:type owl:ObjectProperty ;
+                          rdfs:domain sri4ev:SetChargingProfileRequestCommand ;
+                          rdfs:range sri4ev:ChargingProfile .
+
+###  https://w3id.org/resonance/sri4ev#hasChargingSchedule
+sri4ev:hasChargingSchedule rdf:type owl:ObjectProperty ;
+                           rdfs:domain sri4ev:ChargingProfile ;
+                           rdfs:range sri4ev:ChargingSchedule .
+
+###  https://w3id.org/resonance/sri4ev#hasCommandStatus
+sri4ev:hasCommandStatus rdf:type owl:ObjectProperty ;
+                        rdfs:domain sri4ev:RequestCommand ;
+                        rdfs:range sri4ev:CommandStatus .
+
+###  https://w3id.org/resonance/sri4ev#hasConnectorType
+sri4ev:hasConnectorType rdf:type owl:ObjectProperty ;
+                        rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                        rdfs:range sri4ev:ConnectorType .
+
+###  https://w3id.org/resonance/sri4ev#hasDesiredStateOfCharge
+sri4ev:hasDesiredStateOfCharge rdf:type owl:ObjectProperty ;
+                               rdfs:domain sri4ev:ElectricVehicleUser ;
+                               rdfs:range sri4ev:ElectricVehicleUserPreference .
+
+###  https://w3id.org/resonance/sri4ev#hasLocation
+sri4ev:hasLocation rdf:type owl:ObjectProperty ;
+                   rdfs:domain sri4ev:ElectricVehicleChargingStation ;
+                   rdfs:range <https://w3id.org/bot#Zone> .
+
+###  https://w3id.org/resonance/sri4ev#hasPowerType
+sri4ev:hasPowerType rdf:type owl:ObjectProperty ;
+                    rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                    rdfs:range sri4ev:PowerType .
+
+###  https://w3id.org/resonance/sri4ev#hasPreference
+sri4ev:hasPreference rdf:type owl:ObjectProperty ;
+                     rdfs:domain sri4ev:ElectricVehicleUser ;
+                     rdfs:range sri4ev:ElectricVehicleUserPreference .
+
+###  https://w3id.org/resonance/sri4ev#hasStateOfCharge
+sri4ev:hasStateOfCharge rdf:type owl:ObjectProperty ;
+                        rdfs:domain sri4ev:ElectricVehicleBattery ;
+                        rdfs:range sri4ev:StateOfCharge .
+
+###  https://w3id.org/resonance/sri4ev#hasStatus
+sri4ev:hasStatus rdf:type owl:ObjectProperty ;
+                 rdfs:domain sri4ev:ChargingSession ,
+                             sri4ev:ElectricVehicleChargingStation ,
+                             sri4ev:ElectricVehicleSupplyEquipment ,
+                             sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                 rdfs:range sri4ev:Status .
+
+###  https://w3id.org/resonance/sri4ev#hasToken
+sri4ev:hasToken rdf:type owl:ObjectProperty ;
+                owl:inverseOf sri4ev:isAssignedToUser ;
+                rdfs:domain sri4ev:ElectricVehicleUser ;
+                rdfs:range sri4ev:Token .
+
+###  https://w3id.org/resonance/sri4ev#includesConnector
+sri4ev:includesConnector rdf:type owl:ObjectProperty ;
+                         rdfs:domain sri4ev:SetChargingProfileRequestCommand ;
+                         rdfs:range sri4ev:ElectricVehicleSupplyEquipmentConnector .
+
+###  https://w3id.org/resonance/sri4ev#isAppliedOnChargingSession
+sri4ev:isAppliedOnChargingSession rdf:type owl:ObjectProperty ;
+                                  rdfs:domain sri4ev:ChargingProfile ;
+                                  rdfs:range sri4ev:ChargingSession .
+
+###  https://w3id.org/resonance/sri4ev#isAssignedToUser
+sri4ev:isAssignedToUser rdf:type owl:ObjectProperty ;
+                        rdfs:domain sri4ev:Token ;
+                        rdfs:range sri4ev:ElectricVehicleUser .
+
+###  https://w3id.org/resonance/sri4ev#isAssociatedWithChargingSession
+sri4ev:isAssociatedWithChargingSession rdf:type owl:ObjectProperty ;
+                                       rdfs:domain [ rdf:type owl:Class ;
+                                                     owl:unionOf ( sri4ev:ChargingSessionsRequestCommand
+                                                                   sri4ev:PowerMeasurmentsRequestCommand
+                                                                 )
+                                                   ] ;
+                                       rdfs:range sri4ev:ChargingSession .
+
+###  https://w3id.org/resonance/sri4ev#isAssociatedWithRequest
+sri4ev:isAssociatedWithRequest rdf:type owl:ObjectProperty ;
+                               owl:inverseOf sri4ev:isAssociatedWithResponse ;
+                               rdfs:domain sri4ev:ResponseCommand ;
+                               rdfs:range sri4ev:RequestCommand .
+
+###  https://w3id.org/resonance/sri4ev#isAssociatedWithResponse
+sri4ev:isAssociatedWithResponse rdf:type owl:ObjectProperty ;
+                                rdfs:domain sri4ev:RequestCommand ;
+                                rdfs:range sri4ev:ResponseCommand .
+
+###  https://w3id.org/resonance/sri4ev#isConnectedToStation
+sri4ev:isConnectedToStation rdf:type owl:ObjectProperty ;
+                            rdfs:domain sri4ev:ElectricVehicle ,
+                                        sri4ev:EnergyMeter ;
+                            rdfs:range sri4ev:ElectricVehicleChargingStation .
+
+###  https://w3id.org/resonance/sri4ev#isInstantiatedBy
+sri4ev:isInstantiatedBy rdf:type owl:ObjectProperty ;
+                        rdfs:domain sri4ev:Token ;
+                        rdfs:range sri4ev:ChargingSession .
+
+###  https://w3id.org/resonance/sri4ev#isInvolvedInChargingSession
+sri4ev:isInvolvedInChargingSession rdf:type owl:ObjectProperty ;
+                                   owl:inverseOf sri4ev:isRelatedToEVBattery ;
+                                   rdfs:domain sri4ev:ElectricVehicleBattery ;
+                                   rdfs:range sri4ev:ChargingSession .
+
+###  https://w3id.org/resonance/sri4ev#isOwnedBy
+sri4ev:isOwnedBy rdf:type owl:ObjectProperty ;
+                 owl:inverseOf sri4ev:owns ;
+                 rdfs:domain sri4ev:ElectricVehicle ;
+                 rdfs:range sri4ev:ElectricVehicleUser .
+
+###  https://w3id.org/resonance/sri4ev#isPartOfEVSE
+sri4ev:isPartOfEVSE rdf:type owl:ObjectProperty ;
+                    rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                    rdfs:range sri4ev:ElectricVehicleSupplyEquipment .
+
+###  https://w3id.org/resonance/sri4ev#isPartOfPool
+sri4ev:isPartOfPool rdf:type owl:ObjectProperty ;
+                    rdfs:domain sri4ev:ElectricVehicleChargingStation ;
+                    rdfs:range sri4ev:ElectricVehicleChargingStationPool .
+
+###  https://w3id.org/resonance/sri4ev#isPartOfStation
+sri4ev:isPartOfStation rdf:type owl:ObjectProperty ;
+                       rdfs:domain sri4ev:ElectricVehicleSupplyEquipment ;
+                       rdfs:range sri4ev:ElectricVehicleChargingStation .
+
+###  https://w3id.org/resonance/sri4ev#isReceivedByCommandReceiver
+sri4ev:isReceivedByCommandReceiver rdf:type owl:ObjectProperty ;
+                                   owl:inverseOf sri4ev:receivesCommand ;
+                                   rdfs:domain sri4ev:Command ;
+                                   rdfs:range sri4ev:CommandReceiver .
+
+###  https://w3id.org/resonance/sri4ev#isRelatedToChargingSession
+sri4ev:isRelatedToChargingSession rdf:type owl:ObjectProperty ;
+                                  rdfs:domain sri4ev:ElectricVehicleChargingStation ;
+                                  rdfs:range sri4ev:ChargingSession .
+
+###  https://w3id.org/resonance/sri4ev#isRelatedToConnector
+sri4ev:isRelatedToConnector rdf:type owl:ObjectProperty ;
+                            owl:inverseOf sri4ev:isUsedInChargingSession ;
+                            rdfs:domain sri4ev:ChargingSession ;
+                            rdfs:range sri4ev:ElectricVehicleSupplyEquipmentConnector .
+
+###  https://w3id.org/resonance/sri4ev#isRelatedToEVBattery
+sri4ev:isRelatedToEVBattery rdf:type owl:ObjectProperty ;
+                            rdfs:domain sri4ev:ChargingSession ;
+                            rdfs:range sri4ev:ElectricVehicleBattery .
+
+###  https://w3id.org/resonance/sri4ev#isSentByCommandSender
+sri4ev:isSentByCommandSender rdf:type owl:ObjectProperty ;
+                             owl:inverseOf sri4ev:sendsCommand ;
+                             rdfs:domain sri4ev:Command ;
+                             rdfs:range sri4ev:CommandSender .
+
+###  https://w3id.org/resonance/sri4ev#isUsedInChargingSession
+sri4ev:isUsedInChargingSession rdf:type owl:ObjectProperty ;
+                               rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                               rdfs:range sri4ev:ChargingSession .
+
+###  https://w3id.org/resonance/sri4ev#isValidDuring
+sri4ev:isValidDuring rdf:type owl:ObjectProperty ;
+                     rdfs:domain sri4ev:Status ;
+                     rdfs:range time:DateTimeInterval .
+
+###  https://w3id.org/resonance/sri4ev#owns
+sri4ev:owns rdf:type owl:ObjectProperty ;
+            rdfs:domain sri4ev:ElectricVehicleUser ;
+            rdfs:range sri4ev:ElectricVehicle .
+
+###  https://w3id.org/resonance/sri4ev#receivesCommand
+sri4ev:receivesCommand rdf:type owl:ObjectProperty ;
+                       rdfs:domain sri4ev:CommandReceiver ;
+                       rdfs:range sri4ev:Command .
+
+###  https://w3id.org/resonance/sri4ev#sendsCommand
+sri4ev:sendsCommand rdf:type owl:ObjectProperty ;
+                    rdfs:domain sri4ev:CommandSender ;
+                    rdfs:range sri4ev:Command .
+
+#################################################################
+#    Data properties
+#################################################################
+###  https://w3id.org/resonance/sri4ev#allowDischarging
+sri4ev:allowDischarging rdf:type owl:DatatypeProperty ;
+                        rdfs:domain sri4ev:ElectricVehicleUserPreference ;
+                        rdfs:range xsd:boolean .
+
+###  https://w3id.org/resonance/sri4ev#amperage
+sri4ev:amperage rdf:type owl:DatatypeProperty ;
+                rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                rdfs:range xsd:float ;
+                rdfs:comment "Typical amperage value supported by the connector."@en .
+
+###  https://w3id.org/resonance/sri4ev#batteryCapacity
+sri4ev:batteryCapacity rdf:type owl:DatatypeProperty ;
+                       rdfs:domain sri4ev:ElectricVehicleBattery ;
+                       rdfs:comment "Energy capacity of the battery of EV."@en ;
+                       rdfs:label "Battery Capacity"@en .
+
+###  https://w3id.org/resonance/sri4ev#chargingEnergyLimit
+sri4ev:chargingEnergyLimit rdf:type owl:DatatypeProperty ;
+                           rdfs:domain sri4ev:ChargingPeriodProperty ;
+                           rdfs:range xsd:float .
+
+###  https://w3id.org/resonance/sri4ev#chargingEnergyUnit
+sri4ev:chargingEnergyUnit rdf:type owl:DatatypeProperty ;
+                          rdfs:domain sri4ev:ChargingPeriodProperty ;
+                          rdfs:range xsd:string .
+
+###  https://w3id.org/resonance/sri4ev#connectedTime
+sri4ev:connectedTime rdf:type owl:DatatypeProperty ;
+                     rdfs:domain sri4ev:ElectricVehicle ;
+                     rdfs:range xsd:dateTime .
+
+###  https://w3id.org/resonance/sri4ev#connectorFormat
+sri4ev:connectorFormat rdf:type owl:DatatypeProperty ;
+                       rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector .
+
+###  https://w3id.org/resonance/sri4ev#connectorNumber
+sri4ev:connectorNumber rdf:type owl:DatatypeProperty ;
+                       rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                       rdfs:range xsd:string .
+
+###  https://w3id.org/resonance/sri4ev#currentStateOfCharge
+sri4ev:currentStateOfCharge rdf:type owl:DatatypeProperty ;
+                            rdfs:domain sri4ev:ElectricVehicleBattery ;
+                            rdfs:range xsd:float ;
+                            rdfs:comment "Indicates the current state of charge of the vehicle connected (associated with the battery)"@en ;
+                            rdfs:label "Current State Of Charge"@en .
+
+###  https://w3id.org/resonance/sri4ev#departureTime
+sri4ev:departureTime rdf:type owl:DatatypeProperty ;
+                     rdfs:domain sri4ev:ElectricVehicle ;
+                     rdfs:range xsd:dateTime .
+
+###  https://w3id.org/resonance/sri4ev#desiredStateOfCharge
+sri4ev:desiredStateOfCharge rdf:type owl:DatatypeProperty ;
+                            rdfs:domain sri4ev:ElectricVehicleUserPreference ;
+                            rdfs:range xsd:float .
+
+###  https://w3id.org/resonance/sri4ev#duration
+sri4ev:duration rdf:type owl:DatatypeProperty ;
+                rdfs:domain sri4ev:ChargingSchedule ;
+                rdfs:range xsd:integer .
+
+###  https://w3id.org/resonance/sri4ev#endTime
+sri4ev:endTime rdf:type owl:DatatypeProperty ;
+               rdfs:domain sri4ev:ChargingPeriodProperty ,
+                           sri4ev:ChargingProfile ,
+                           sri4ev:ChargingSession ;
+               rdfs:range xsd:dateTime .
+
+###  https://w3id.org/resonance/sri4ev#evseNumber
+sri4ev:evseNumber rdf:type owl:DatatypeProperty ;
+                  rdfs:domain sri4ev:ElectricVehicleSupplyEquipment ;
+                  rdfs:range xsd:string .
+
+###  https://w3id.org/resonance/sri4ev#gridMode
+sri4ev:gridMode rdf:type owl:DatatypeProperty ;
+                rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                rdfs:range xsd:string .
+
+###  https://w3id.org/resonance/sri4ev#hasManufacturer
+sri4ev:hasManufacturer rdf:type owl:DatatypeProperty ;
+                       rdfs:domain sri4ev:ElectricVehicle ;
+                       rdfs:range xsd:string .
+
+###  https://w3id.org/resonance/sri4ev#hasPurpose
+sri4ev:hasPurpose rdf:type owl:DatatypeProperty ;
+                  rdfs:domain sri4ev:ChargingProfile ;
+                  rdfs:range xsd:string .
+
+###  https://w3id.org/resonance/sri4ev#identifier
+sri4ev:identifier rdf:type owl:DatatypeProperty ;
+                  rdfs:domain sri4ev:ChargingProfile ,
+                              sri4ev:ChargingSchedule ,
+                              sri4ev:ChargingSession ,
+                              sri4ev:ElectricVehicle ,
+                              sri4ev:ElectricVehicleBattery ,
+                              sri4ev:ElectricVehicleCharger ,
+                              sri4ev:ElectricVehicleChargingStation ,
+                              sri4ev:ElectricVehicleChargingStationPool ,
+                              sri4ev:ElectricVehicleSupplyEquipment ,
+                              sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "An identifier that is assigned to a data entity."@en ;
+                  rdfs:label "Identifier"@en .
+
+###  https://w3id.org/resonance/sri4ev#isBidirectional
+sri4ev:isBidirectional rdf:type owl:DatatypeProperty ;
+                       rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                       rdfs:range xsd:boolean ;
+                       rdfs:comment "Indicates if the connector is supporting V2G."@en .
+
+###  https://w3id.org/resonance/sri4ev#limit
+sri4ev:limit rdf:type owl:DatatypeProperty ;
+             rdfs:domain sri4ev:ChargingSchedulePeriod ;
+             rdfs:range xsd:integer .
+
+###  https://w3id.org/resonance/sri4ev#manufacturer
+sri4ev:manufacturer rdf:type owl:DatatypeProperty ;
+                    rdfs:label "Manufacturer"@en .
+
+###  https://w3id.org/resonance/sri4ev#maximumCurrent
+sri4ev:maximumCurrent rdf:type owl:DatatypeProperty ;
+                      rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                      rdfs:range xsd:float .
+
+###  https://w3id.org/resonance/sri4ev#minimumChargingRate
+sri4ev:minimumChargingRate rdf:type owl:DatatypeProperty ;
+                           rdfs:domain sri4ev:ChargingSchedule ;
+                           rdfs:range xsd:float .
+
+###  https://w3id.org/resonance/sri4ev#minimumCurrent
+sri4ev:minimumCurrent rdf:type owl:DatatypeProperty ;
+                      rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                      rdfs:range xsd:float .
+
+###  https://w3id.org/resonance/sri4ev#model
+sri4ev:model rdf:type owl:DatatypeProperty ;
+             rdfs:domain sri4ev:ElectricVehicle ,
+                         sri4ev:ElectricVehicleChargingStation ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Model specifies the electric vehicle's model, enabling the identification of specific attributes related to the device, such as vehicle model, charging station model"@en ;
+             rdfs:label "Vehicle Model"@en .
+
+###  https://w3id.org/resonance/sri4ev#name
+sri4ev:name rdf:type owl:DatatypeProperty ;
+            rdfs:domain sri4ev:ElectricVehicleChargingStation ,
+                        sri4ev:ElectricVehicleChargingStationPool ,
+                        sri4ev:ElectricVehicleSupplyEquipment ,
+                        sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+            rdfs:range xsd:string ;
+            rdfs:comment "a name that is assigned to a data entity."@en ;
+            rdfs:label "name"@en .
+
+###  https://w3id.org/resonance/sri4ev#nominalVoltage
+sri4ev:nominalVoltage rdf:type owl:DatatypeProperty ;
+                      rdfs:domain sri4ev:ElectricVehicleBattery ,
+                                  sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                      rdfs:comment "Nominal voltage associated with a device."@en ;
+                      rdfs:label "Nominal Voltage"@en .
+
+###  https://w3id.org/resonance/sri4ev#numberPhases
+sri4ev:numberPhases rdf:type owl:DatatypeProperty ;
+                    rdfs:domain sri4ev:ChargingSchedulePeriod ;
+                    rdfs:range xsd:integer .
+
+###  https://w3id.org/resonance/sri4ev#plugFormat
+sri4ev:plugFormat rdf:type owl:DatatypeProperty ;
+                  rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+                  rdfs:range xsd:string ;
+                  rdfs:label "Plug Format"@en .
+
+###  https://w3id.org/resonance/sri4ev#power
+sri4ev:power rdf:type owl:DatatypeProperty ;
+             rdfs:domain sri4ev:ElectricVehicleSupplyEquipmentConnector ;
+             rdfs:range xsd:string .
+
+###  https://w3id.org/resonance/sri4ev#recurrencyKind
+sri4ev:recurrencyKind rdf:type owl:DatatypeProperty ;
+                      rdfs:domain sri4ev:ChargingProfile ;
+                      rdfs:range xsd:string .
+
+###  https://w3id.org/resonance/sri4ev#startPeriod
+sri4ev:startPeriod rdf:type owl:DatatypeProperty ;
+                   rdfs:domain sri4ev:ChargingSchedulePeriod ;
+                   rdfs:range xsd:integer .
+
+###  https://w3id.org/resonance/sri4ev#startTime
+sri4ev:startTime rdf:type owl:DatatypeProperty ;
+                 rdfs:domain sri4ev:ChargingPeriodProperty ,
+                             sri4ev:ChargingProfile ,
+                             sri4ev:ChargingSchedule ,
+                             sri4ev:ChargingSession ;
+                 rdfs:range xsd:dateTime .
+
+###  https://w3id.org/resonance/sri4ev#stationModel
+sri4ev:stationModel rdf:type owl:DatatypeProperty ;
+                    rdfs:comment "Model of the charging station."@en ;
+                    rdfs:label "Station Model"@en .
+
+###  https://w3id.org/resonance/sri4ev#timestamp
+sri4ev:timestamp rdf:type owl:DatatypeProperty ;
+                 rdfs:domain sri4ev:StateOfCharge ;
+                 rdfs:range xsd:dateTime .
+
+###  https://w3id.org/resonance/sri4ev#tokenType
+sri4ev:tokenType rdf:type owl:DatatypeProperty ;
+                 rdfs:domain sri4ev:Token ;
+                 rdfs:comment "Token type is the type of the authentication mode entered like EMAID, ISO14443, ISO15693 (RFID), KEY_CODE, MAC_ADDRESS,  ISO7812 (note : type CENTRAL, LOCAL,NO_AUTHORIZATION also associated in token type but not in this context ). [source to this definition-TBA]"@en ;
+                 rdfs:label "Token Type"@en .
+
+###  https://w3id.org/resonance/sri4ev#tokenValue
+sri4ev:tokenValue rdf:type owl:DatatypeProperty ;
+                  rdfs:domain sri4ev:Token ;
+                  rdfs:range xsd:token ;
+                  rdfs:comment "Token value is a string value associated to a user entity. Example: rfid tag in case of token of rfid type."@en ;
+                  rdfs:label "Token Value"@en .
+
+###  https://w3id.org/resonance/sri4ev#totalDeliveredEnergy
+sri4ev:totalDeliveredEnergy rdf:type owl:DatatypeProperty ;
+                            rdfs:domain sri4ev:ChargingSession ;
+                            rdfs:range xsd:float .
+
+###  https://w3id.org/resonance/sri4ev#userId
+sri4ev:userId rdf:type owl:DatatypeProperty ;
+              rdfs:domain sri4ev:ElectricVehicleUser ;
+              rdfs:comment "Unique identifier for the EV user."@en ;
+              rdfs:label "User ID"@en .
+
+###  https://w3id.org/resonance/sri4ev#validOn
+sri4ev:validOn rdf:type owl:DatatypeProperty ;
+               rdfs:domain sri4ev:Status ;
+               rdfs:range xsd:dateTime .
+
+###  https://w3id.org/resonance/sri4ev#value
+sri4ev:value rdf:type owl:DatatypeProperty ;
+             rdfs:domain sri4ev:StateOfCharge .
+
+###  https://w3id.org/resonance/sri4ev#vehicleId
+sri4ev:vehicleId rdf:type owl:DatatypeProperty ;
+                 rdfs:domain sri4ev:ElectricVehicle ;
+                 rdfs:comment "Unique identifier for the vehicle."@en ;
+                 rdfs:label "Vehicle ID"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.w3.org/2006/time#DateTimeInterval
+time:DateTimeInterval rdf:type owl:Class .
+
+###  https://w3id.org/bot#Zone
+<https://w3id.org/bot#Zone> rdf:type owl:Class .
+
+###  https://w3id.org/resonance/sri4ev#ChargingPeriodProperty
+sri4ev:ChargingPeriodProperty rdf:type owl:Class ;
+                              rdfs:comment "A property that defines characteristics related to a specific charging period"@en ;
+                              rdfs:label "Charging Period Property"@en .
+
+###  https://w3id.org/resonance/sri4ev#ChargingProfile
+sri4ev:ChargingProfile rdf:type owl:Class ;
+                        rdfs:comment "A structured set of parameters that define the charging behavior of an electric vehicle"@en ;
+                       rdfs:label "Charging Profile"@en .
+
+###  https://w3id.org/resonance/sri4ev#ChargingSchedule
+sri4ev:ChargingSchedule rdf:type owl:Class ;
+                        rdfs:comment "A charging schedule is a plan for charging electric vehicles."@en ;
+                        rdfs:label "Charging Schedule" .
+
+###  https://w3id.org/resonance/sri4ev#ChargingSchedulePeriod
+sri4ev:ChargingSchedulePeriod rdf:type owl:Class ;
+                              rdfs:comment "A charging schedule period is a specific period within a charging schedule that defines charging parameters "@en ;
+                              rdfs:label "Charging Schedule Period"@en .
+
+###  https://w3id.org/resonance/sri4ev#ChargingSession
+sri4ev:ChargingSession rdf:type owl:Class ;
+                       rdfs:comment "A session is a general term that refers to the charging process of an EV, that might include a Transaction. (Source OCPP)"@en ;
+                       rdfs:label "Charging Session" .
+
+###  https://w3id.org/resonance/sri4ev#ChargingSessionsRequestCommand
+sri4ev:ChargingSessionsRequestCommand rdf:type owl:Class ;
+                                      rdfs:comment "A command sent to request information about active or past charging sessions. "@en ;
+                                      rdfs:subClassOf sri4ev:RequestCommand .
+
+###  https://w3id.org/resonance/sri4ev#ChargingSessionsResponseCommand
+sri4ev:ChargingSessionsResponseCommand rdf:type owl:Class ;
+                                       rdfs:comment "A response command providing requested data about charging sessions. "@en ;
+                                       rdfs:subClassOf sri4ev:ResponseCommand .
+
+###  https://w3id.org/resonance/sri4ev#Command
+sri4ev:Command rdf:type owl:Class ;
+               rdfs:comment "A general abstraction representing an instruction sent from one entity to another within the smart charging infrastructure."@en ;
+               rdfs:label "Command"@en .
+
+###  https://w3id.org/resonance/sri4ev#CommandReceiver
+sri4ev:CommandReceiver rdf:type owl:Class ;
+                       rdfs:comment "An entity or system component capable of receiving and processing commands related to charging operations and infrastructure control."@en ;
+                       rdfs:label "Command Receiver"@en .
+
+###  https://w3id.org/resonance/sri4ev#CommandSender
+sri4ev:CommandSender rdf:type owl:Class ;
+                     rdfs:comment "An entity or system component responsible for sending commands to other components within the charging ecosystem."@en ;
+                     rdfs:label "Command Sender"@en .
+
+###  https://w3id.org/resonance/sri4ev#CommandStatus
+sri4ev:CommandStatus rdf:type owl:Class ;
+                     rdfs:comment "An indicator representing the current state or outcome of a command execution, such as 'pending', 'executed', or 'failed'. "@en ;
+                     rdfs:label "Command Status"@en .
+
+###  https://w3id.org/resonance/sri4ev#ConnectorType
+sri4ev:ConnectorType rdf:type owl:Class ;
+                     rdfs:comment "A classification of charging connectors based on technical specifications, such as Type 1, Type 2, CCS, or CHAdeMO."@en ;
+                     rdfs:label "Connector Type"@en .
+
+###  https://w3id.org/resonance/sri4ev#CurrentConnectorsStatusRequestCommand
+sri4ev:CurrentConnectorsStatusRequestCommand rdf:type owl:Class ;
+                                             rdfs:comment "A command used to request the current status of charging connectors, including availability and operational state."@en ;
+                                             rdfs:subClassOf sri4ev:RequestCommand .
+
+###  https://w3id.org/resonance/sri4ev#CurrentConnectorsStatusResponseCommand
+sri4ev:CurrentConnectorsStatusResponseCommand rdf:type owl:Class ;
+                                              rdfs:comment "A response command providing real-time information about the status of charging connectors, such as 'available', 'in use', or 'faulty'."@en ;
+                                              rdfs:subClassOf sri4ev:ResponseCommand .
+
+###  https://w3id.org/resonance/sri4ev#CurrentInfrastructureDataRequestCommand
+sri4ev:CurrentInfrastructureDataRequestCommand rdf:type owl:Class ;
+                                               rdfs:comment "A command requesting real-time data about the charging infrastructure, including station availability, power capacity, and operational status."@en ;
+                                               rdfs:subClassOf sri4ev:RequestCommand .
+
+###  https://w3id.org/resonance/sri4ev#CurrentInfrastructureDataResponsCommand
+sri4ev:CurrentInfrastructureDataResponsCommand rdf:type owl:Class ;
+                                               rdfs:comment "A response command providing real-time data about the charging infrastructure, such as active charging sessions, power usage, and network status."@en ;
+                                               rdfs:subClassOf sri4ev:ResponseCommand .
+
+###  https://w3id.org/resonance/sri4ev#DemandResponseEvent
+sri4ev:DemandResponseEvent rdf:type owl:Class ;
+                           rdfs:comment "An event triggered by a demand response system to adjust charging operations based on grid conditions, energy prices, or load balancing requirements."@en ;
+                           rdfs:label "Demand Response Event"@en .
+
+###  https://w3id.org/resonance/sri4ev#ElectricPower
+sri4ev:ElectricPower rdf:type owl:Class ;
+                     rdfs:comment "The amount of electrical energy transferred per unit time, typically measured in watts (W) or kilowatts (kW), relevant for charging operations."@en ;
+                     rdfs:label "Electric Power"@en .
+
+###  https://w3id.org/resonance/sri4ev#ElectricVehicle
+sri4ev:ElectricVehicle rdf:type owl:Class ;
+                       rdfs:comment "Electric Vehicle is a distributed energy resource with a remote battery and socket. (source OCPP) "@en ;
+                       rdfs:label "Electric Vehicle"@en;
+                       rdfs:seeAlso <https://openchargealliance.org/protocols/open-charge-point-protocol/> .
+
+###  https://w3id.org/resonance/sri4ev#ElectricVehicleBattery
+sri4ev:ElectricVehicleBattery rdf:type owl:Class ;
+                              rdfs:comment "A rechargeable energy storage system in an electric vehicle, responsible for storing and supplying electrical power for vehicle operation and charging."@en ;
+                              rdfs:label "Electric Vehicle Battery"@en .
+
+###  https://w3id.org/resonance/sri4ev#ElectricVehicleCharger
+sri4ev:ElectricVehicleCharger rdf:type owl:Class ;
+                              rdfs:comment "A device or system component responsible for delivering electrical power to an electric vehicle battery, supporting charging standards and power levels."@en ;
+                              rdfs:label "Electric Vehicle Charger"@en ;
+                              owl:equivalentClass sri4ev:ElectricVehicleChargingStation .
+
+###  https://w3id.org/resonance/sri4ev#ElectricVehicleChargingStation
+sri4ev:ElectricVehicleChargingStation rdf:type owl:Class  ;
+                              rdfs:comment "A physical infrastructure providing electric vehicle charging services, consisting of one or more chargers and connectors."@en ;
+                              rdfs:label "Electric Vehicle Charging Station"@en .
+
+###  https://w3id.org/resonance/sri4ev#ElectricVehicleChargingStationPool
+sri4ev:ElectricVehicleChargingStationPool rdf:type owl:Class ;
+                                          rdfs:comment "An electric vehicle charging station pool is connected to the grid and composed of one or more electric vehicle charging stations.(source SEAS Ontology)"@en ;
+                                          rdfs:label "Electric Vehicle Charging Station Pool"@en ;
+                                          rdfs:seeAlso <https://openchargealliance.org/protocols/open-charge-point-protocol/> .
+
+###  https://w3id.org/resonance/sri4ev#ElectricVehicleSupplyEquipment
+sri4ev:ElectricVehicleSupplyEquipment rdf:type owl:Class ;
+                                      rdfs:comment """ESCV is conductors, including the phase(s), neutral and protective earth conductors, the EV couplers, attached plugs, and all other accessories, devices, power outlets or apparatuses 
+installed specifically for the purpose of delivering energy from the premises wiring to the EV and allowing communication between them as necessary (source IEC61851-23_Ed2_CDV)"""@en ;
+                                      rdfs:label "Electric Vehicle Supply Equipment"@en ;
+                                      rdfs:seeAlso <https://linkToIEC> .
+
+###  https://w3id.org/resonance/sri4ev#ElectricVehicleSupplyEquipmentConnector
+sri4ev:ElectricVehicleSupplyEquipmentConnector rdf:type owl:Class ;
+                                               rdfs:comment """The term Connector, as used in this specification, refers to an independentlyoperated and managed electrical outlet on a Charging Station. In other words,
+this corresponds to a single physical Connector. In some cases an EVSE may have multiple Connectors: multiple physical socket types and/or types (e.g. four-wheeled EVs and electric scooters)."""@en ;
+                                               rdfs:label "Electric Vehicle Supply Equipment Connector"@en .
+
+###  https://w3id.org/resonance/sri4ev#ElectricVehicleUser
+sri4ev:ElectricVehicleUser rdf:type owl:Class ;
+                           rdfs:comment "An individual or entity that owns or operates an electric vehicle and interacts with charging infrastructure."@en ;
+                           rdfs:label "Electric Vehicle User"@en .
+
+###  https://w3id.org/resonance/sri4ev#ElectricVehicleUserPreference
+sri4ev:ElectricVehicleUserPreference rdf:type owl:Class ;
+                                     rdfs:comment "A set of user-defined configurations or constraints related to charging behavior, such as preferred charging times, power limits, or cost preferences."@en ;
+                                     rdfs:label "Electric Vehicle User Preference"@en .
+
+###  https://w3id.org/resonance/sri4ev#EnergyMeter
+sri4ev:EnergyMeter rdf:type owl:Class ;
+                   rdfs:comment "A device that measures and records electrical energy consumption, typically used in charging stations to track power usage."@en ;
+                   rdfs:label "Energy Meter"@en .
+
+###  https://w3id.org/resonance/sri4ev#PowerMeasurmentsRequestCommand
+sri4ev:PowerMeasurmentsRequestCommand rdf:type owl:Class ;
+                                      rdfs:comment "A command sent to request real-time power measurement data from a charging station or energy meter."@en;
+                                      rdfs:subClassOf sri4ev:RequestCommand .
+
+###  https://w3id.org/resonance/sri4ev#PowerMeasurmentsResponseCommand
+sri4ev:PowerMeasurmentsResponseCommand rdf:type owl:Class ;
+                                       rdfs:comment "A response command providing real-time power measurement data, including power levels, voltage, and current readings."@en;
+                                       rdfs:subClassOf sri4ev:ResponseCommand .
+
+###  https://w3id.org/resonance/sri4ev#PowerType
+sri4ev:PowerType rdf:type owl:Class ;
+                 rdfs:comment "A classification of electric power based on characteristics such as AC/DC type, voltage level, or phase configuration."@en ;
+                 rdfs:label "Power Type"@en .
+
+###  https://w3id.org/resonance/sri4ev#PowerValue
+sri4ev:PowerValue rdf:type owl:Class ;
+                  rdfs:comment "A numerical representation of an electric power measurement, typically expressed in watts (W) or kilowatts (kW)."@en ;
+                  rdfs:label "Power Value"@en .
+
+###  https://w3id.org/resonance/sri4ev#RequestCommand
+sri4ev:RequestCommand rdf:type owl:Class ;
+                      rdfs:comment "A command issued to request specific data or actions from a system component within the charging infrastructure."@en ;
+                      rdfs:label "Request Command"@en ;
+                      rdfs:subClassOf sri4ev:Command .
+
+###  https://w3id.org/resonance/sri4ev#ResponseCommand
+sri4ev:ResponseCommand rdf:type owl:Class ;
+                       rdfs:comment "A command sent in response to a request, providing the requested information or the outcome of the requested action."@en ;
+                       rdfs:label "Response Command"@en;
+                       rdfs:subClassOf sri4ev:Command .
+
+###  https://w3id.org/resonance/sri4ev#SetChargingProfileRequestCommand
+sri4ev:SetChargingProfileRequestCommand rdf:type owl:Class ;
+                                        rdfs:comment "A command used to configure or update a charging profile for an electric vehicle or charging station, specifying parameters such as power limits and scheduling."@en ;
+                                        rdfs:label "Set Charging Profile Request Command"@en ;
+                                        rdfs:subClassOf sri4ev:RequestCommand .
+
+###  https://w3id.org/resonance/sri4ev#SetChargingProfileResponseCommand
+sri4ev:SetChargingProfileResponseCommand rdf:type owl:Class ;
+                                         rdfs:comment "A response command confirming the acceptance or rejection of a requested charging profile configuration, including status and potential error messages."@en ;
+                                         rdfs:label "Set Charging Profile Response Command"@en ;
+                                         rdfs:subClassOf sri4ev:ResponseCommand .
+
+###  https://w3id.org/resonance/sri4ev#StateOfCharge
+sri4ev:StateOfCharge rdf:type owl:Class ;
+                     rdfs:comment "Current state of charge of the EV, in percentage."@en ;
+                     rdfs:label "State Of Charge"@en .
+
+###  https://w3id.org/resonance/sri4ev#Status
+sri4ev:Status rdf:type owl:Class ;
+              rdfs:comment "The status of an EVSE."@en ;
+              rdfs:label "Status"@en .
+
+###  https://w3id.org/resonance/sri4ev#Token
+sri4ev:Token rdf:type owl:Class ;
+             rdfs:comment "Token in electric vehicle context refers to a unique identifier used to authenticate and authorize a user or an electric vehicle for charging services."@en ;
+             rdfs:label "Token"@en .
+
+#################################################################
+#    Individuals
+#################################################################
+###  https://w3id.org/resonance/sri4ev#ACCEPTED
+sri4ev:ACCEPTED rdf:type owl:NamedIndividual ,
+                         sri4ev:CommandStatus .
+
+###  https://w3id.org/resonance/sri4ev#AC_1_PHASE
+sri4ev:AC_1_PHASE rdf:type owl:NamedIndividual ,
+                           sri4ev:PowerType .
+
+###  https://w3id.org/resonance/sri4ev#AC_3_PHASE
+sri4ev:AC_3_PHASE rdf:type owl:NamedIndividual ,
+                           sri4ev:PowerType .
+
+###  https://w3id.org/resonance/sri4ev#AVAILABLE
+sri4ev:AVAILABLE rdf:type owl:NamedIndividual ,
+                          sri4ev:Status ;
+                 rdfs:comment "The EVSE/Connector is able to start a new charging session. (source OCPI-2.2)"@en ;
+                 rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                 rdfs:label "AVAILABLE"@en .
+
+###  https://w3id.org/resonance/sri4ev#CHARGING
+sri4ev:CHARGING rdf:type owl:NamedIndividual ,
+                         sri4ev:Status ;
+                rdfs:comment "The EVSE/Connector is not accessible because of a physical barrier, i.e. a car."@en ;
+                rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                rdfs:label "CHARGING"@en .
+
+###  https://w3id.org/resonance/sri4ev#CHAdeMO
+sri4ev:CHAdeMO rdf:type owl:NamedIndividual ,
+                        sri4ev:ConnectorType ;
+               rdfs:comment "CHAdeMO is the trade name of a quick charging method for battery electric vehicles delivering up to 62.5 kW of direct current (500 V, 125 A[1]) via a special electrical connector (source wikipedia)."@en ;
+               rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+               rdfs:label "CHAdeMO"@en .
+
+###  https://w3id.org/resonance/sri4ev#DC
+sri4ev:DC rdf:type owl:NamedIndividual ,
+                   sri4ev:PowerType .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_A
+sri4ev:DOMESTIC_A rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"A\"\", NEMA 1-15, 2 pins (source OCPI). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC A"@en .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_B
+sri4ev:DOMESTIC_B rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"B\"\", NEMA 5-15, 3 pins (source OCPI 2.2). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC B"@en .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_C
+sri4ev:DOMESTIC_C rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"C\"\", CEE 7/17, 2 pins (source OCPI 2.2). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC C"@en .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_D
+sri4ev:DOMESTIC_D rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"D\"\", 3 pin (source OCPI 2.2). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC D"@en .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_E
+sri4ev:DOMESTIC_E rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"E\"\", CEE 7/5 3 pins (source OCPI 2.2). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC E"@en .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_F
+sri4ev:DOMESTIC_F rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"F\"\", CEE 7/4, Schuko, 3 pins (source OCPI 2.2). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC F"@en .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_G
+sri4ev:DOMESTIC_G rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"G\"\", BS 1363, Commonwealth, 3 pins (source OCPI 2.2). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC G"@en .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_H
+sri4ev:DOMESTIC_H rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"H\"\", SI-32, 3 pins (source OCPI 2.2). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC H"@en .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_I
+sri4ev:DOMESTIC_I rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"I\"\", AS 3112, 3 pins (source OCPI 2.2). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC I"@en .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_J
+sri4ev:DOMESTIC_J rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"J\"\", SEV 1011, 3 pins (source OCPI 2.2). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC J"@en .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_K
+sri4ev:DOMESTIC_K rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"K\"\", DS 60884-2-D1, 3 pins (source OCPI 2.2). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC K"@en .
+
+###  https://w3id.org/resonance/sri4ev#DOMESTIC_L
+sri4ev:DOMESTIC_L rdf:type owl:NamedIndividual ,
+                           sri4ev:ConnectorType ;
+                  rdfs:comment "Standard/Domestic household, type \"\"L\"\", CEI 23-16-VII, 3 pins (source OCPI 2.2). "@en ;
+                  rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                  rdfs:label "DOMESTIC L"@en .
+
+###  https://w3id.org/resonance/sri4ev#ElectricVehicleChargingStation
+sri4ev:ElectricVehicleChargingStation rdf:type owl:NamedIndividual ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty sri4ev:hasLocation ;
+                                                 owl:someValuesFrom <https://w3id.org/bot#Zone>
+                                               ] .
+
+###  https://w3id.org/resonance/sri4ev#FAULTED
+sri4ev:FAULTED rdf:type owl:NamedIndividual ,
+                        sri4ev:Status ;
+               rdfs:comment "" ;
+               rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+               rdfs:label "FAULTED"@en .
+
+###  https://w3id.org/resonance/sri4ev#IEC_60309_2_single_16
+sri4ev:IEC_60309_2_single_16 rdf:type owl:NamedIndividual ,
+                                      sri4ev:ConnectorType ;
+                             rdfs:comment "IEC 60309-2 Industrial Connector single phase 16 amperes (usually blue) (source OCPI 2.2). "@en ;
+                             rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                             rdfs:label "IEC 60309-2 single 16"@en .
+
+###  https://w3id.org/resonance/sri4ev#IEC_60309_2_three_16
+sri4ev:IEC_60309_2_three_16 rdf:type owl:NamedIndividual ,
+                                     sri4ev:ConnectorType ;
+                            rdfs:comment "IEC 60309-2 Industrial Connector three phases 16 amperes (usually red) (source OCPI 2.2). "@en ;
+                            rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                            rdfs:label "IEC 60309-2 three 16"@en .
+
+###  https://w3id.org/resonance/sri4ev#IEC_60309_2_three_32
+sri4ev:IEC_60309_2_three_32 rdf:type owl:NamedIndividual ,
+                                     sri4ev:ConnectorType ;
+                            rdfs:comment "IEC 60309-2 Industrial Connector three phases 32 amperes (usually red) (source OCPI 2.2). "@en ;
+                            rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                            rdfs:label "IEC 60309-2 three 32"@en .
+
+###  https://w3id.org/resonance/sri4ev#IEC_60309_2_three_64
+sri4ev:IEC_60309_2_three_64 rdf:type owl:NamedIndividual ,
+                                     sri4ev:ConnectorType ;
+                            rdfs:comment "IEC 60309-2 Industrial Connector three phases 64 amperes (usually red) (source OCPI 2.2). "@en ;
+                            rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                            rdfs:label "IEC 60309-2 three 64"@en .
+
+###  https://w3id.org/resonance/sri4ev#IEC_62196_T1
+sri4ev:IEC_62196_T1 rdf:type owl:NamedIndividual ,
+                             sri4ev:ConnectorType ;
+                    rdfs:comment "IEC 62196 Type 1 \"\"SAE J1772\"\" (source OCPI 2.2). "@en ;
+                    rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                    rdfs:label "IEC 62196 T1"@en .
+
+###  https://w3id.org/resonance/sri4ev#IEC_62196_T1_COMBO
+sri4ev:IEC_62196_T1_COMBO rdf:type owl:NamedIndividual ,
+                                   sri4ev:ConnectorType ;
+                          rdfs:comment "Combo Type 1 based, DC (source OCPI 2.2). "@en ;
+                          rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                          rdfs:label "IEC 62196 T1 COMBO"@en .
+
+###  https://w3id.org/resonance/sri4ev#IEC_62196_T2
+sri4ev:IEC_62196_T2 rdf:type owl:NamedIndividual ,
+                             sri4ev:ConnectorType ;
+                    rdfs:comment "IEC 62196 Type 2 \"\"Mennekes\"\" (source OCPI 2.2). "@en ;
+                    rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                    rdfs:label "IEC 62196 T2"@en .
+
+###  https://w3id.org/resonance/sri4ev#IEC_62196_T2_COMBO
+sri4ev:IEC_62196_T2_COMBO rdf:type owl:NamedIndividual ,
+                                   sri4ev:ConnectorType ;
+                          rdfs:comment " Combo Type 2 based, DC (source OCPI 2.2). "@en ;
+                          rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                          rdfs:label "IEC 62196 T2 COMBO"@en .
+
+###  https://w3id.org/resonance/sri4ev#IEC_62196_T3A
+sri4ev:IEC_62196_T3A rdf:type owl:NamedIndividual ,
+                              sri4ev:ConnectorType ;
+                     rdfs:comment " IEC 62196 Type 3A (source OCPI 2.2). "@en ;
+                     rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                     rdfs:label "IEC 62196 T3A"@en .
+
+###  https://w3id.org/resonance/sri4ev#IEC_62196_T3C
+sri4ev:IEC_62196_T3C rdf:type owl:NamedIndividual ,
+                              sri4ev:ConnectorType ;
+                     rdfs:comment "IEC 62196 Type 3C \"\"Scame\"\" (source OCPI 2.2). "@en ;
+                     rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                     rdfs:label "IEC 62196 T3C"@en .
+###  https://w3id.org/resonance/sri4ev#NOTSUPPORTED
+sri4ev:NOTSUPPORTED rdf:type owl:NamedIndividual ,
+                             sri4ev:CommandStatus .
+###  https://w3id.org/resonance/sri4ev#OFFLINE
+sri4ev:OFFLINE rdf:type owl:NamedIndividual ,
+                        sri4ev:Status ;
+               rdfs:comment "" ;
+               rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+               rdfs:label "OFFLINE"@en .
+
+###  https://w3id.org/resonance/sri4ev#PANTOGRAPH_BOTTOM_UP
+sri4ev:PANTOGRAPH_BOTTOM_UP rdf:type owl:NamedIndividual ,
+                                     sri4ev:ConnectorType ;
+                            rdfs:comment " On-board Bottom-up-Pantograph typically for bus charging (source OCPI 2.2). "@en ;
+                            rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                            rdfs:label "PANTOGRAPH BOTTOM UP"@en .
+###  https://w3id.org/resonance/sri4ev#PANTOGRAPH_TOP_DOWN
+sri4ev:PANTOGRAPH_TOP_DOWN rdf:type owl:NamedIndividual ,
+                                    sri4ev:ConnectorType ;
+                           rdfs:comment " Off-board Top-down-Pantograph typically for bus charging (source OCPI 2.2). "@en ;
+                           rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                           rdfs:label "PANTOGRAPH TOP DOWN"@en .
+
+###  https://w3id.org/resonance/sri4ev#PENDING
+sri4ev:PENDING rdf:type owl:NamedIndividual ,
+                        sri4ev:CommandStatus .
+###  https://w3id.org/resonance/sri4ev#REFUSED
+sri4ev:REFUSED rdf:type owl:NamedIndividual ,
+                        sri4ev:CommandStatus .
+###  https://w3id.org/resonance/sri4ev#RESERVED
+sri4ev:RESERVED rdf:type owl:NamedIndividual ,
+                         sri4ev:Status ;
+                rdfs:comment "" ;
+                rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                rdfs:label "RESERVED"@en .
+###  https://w3id.org/resonance/sri4ev#TESLA_R
+sri4ev:TESLA_R rdf:type owl:NamedIndividual ,
+                        sri4ev:ConnectorType ;
+               rdfs:comment " Tesla Connector \"\"Roadster\"\"-type (round, 4 pin) (source OCPI 2.2). "@en ;
+               rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+               rdfs:label "TESLA R"@en .
+###  https://w3id.org/resonance/sri4ev#TESLA_S
+sri4ev:TESLA_S rdf:type owl:NamedIndividual ,
+                        sri4ev:ConnectorType ;
+               rdfs:comment " Tesla Connector \"\"Model-S\"\"-type (oval, 5 pin) (source OCPI 2.2). "@en ;
+               rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+               rdfs:label "TESLA S"@en .
+###  https://w3id.org/resonance/sri4ev#UNAVAILABLE
+sri4ev:UNAVAILABLE rdf:type owl:NamedIndividual ,
+                            sri4ev:Status ;
+                   rdfs:comment "" ;
+                   rdfs:isDefinedBy <https://w3id.org/resonance/sri4ev#> ;
+                   rdfs:label "UNAVAILABLE"@en .
+
+sri4ev:ElectricVehicleChargingStation rdfs:comment "The Charging Station is the physical system where an EV can be charged. A Charging Station has one or more EVSEs. (source OCPP)"@en ;
+                                      rdfs:label "Electric Vehicle Charging Station" ;
+                                      rdfs:seeAlso <https://openchargealliance.org/protocols/open-charge-point-protocol/> .
+

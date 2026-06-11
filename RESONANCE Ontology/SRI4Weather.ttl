@@ -1,0 +1,254 @@
+@prefix : <https://w3id.org/resonance/SRI4Weather#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix vann: <http://purl.org/vocab/vann#> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix dcterms: <http://purl.org/dc/terms#> .
+@prefix sri4weather: <https://w3id.org/resonance/SRI4Weather#> .
+@base <https://w3id.org/resonance/SRI4Weather#> .
+
+<https://w3id.org/resonance/SRI4Weather#> rdf:type owl:Ontology ;
+                                           owl:versionIRI <https://w3id.org/resonance/SRI4Weather-1.0#> ;
+                                           dcterms:created "2024-07-15"^^xsd:date ;
+                                           dcterms:creator <https://www.resonance-project.eu/> , <https://www.linkedin.com/in/henon-lamboro/> ;
+                                           dcterms:issued "2025-07-15"^^xsd:date ;
+                                           dcterms:license "CC0-1.0" ;
+                                           dcterms:modified "2025-11-26"^^xsd:date ;
+                                           dcterms:rights "Copyright (c) RESONANCE Consortium"@en ;
+                                           dcterms:title "Semantic Resorce Interface For Weather Ontology"@en ;
+                                           dcterms:description: " "@en ;
+                                           vann:preferredNamespacePrefix "sri4weather" ;
+                                           vann:preferredNamespaceUri <https://w3id.org/resonance> ;
+                                           rdfs:label "sri4weather Ontology"@en ;
+                                           owl:versionInfo "v1.0" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms#contributor
+dcterms:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#created
+dcterms:created rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#creator
+dcterms:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#description
+dcterms:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#issued
+dcterms:issued rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#license
+dcterms:license rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#modified
+dcterms:modified rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#rights
+dcterms:rights rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#title
+dcterms:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms#description:
+dcterms:description: rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann#preferredNamespacePrefix
+vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann#preferredNamespaceUri
+vann:preferredNamespaceUri rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://w3id.org/resonance/sri4weather#hasLocation
+sri4weather:hasLocation rdf:type owl:ObjectProperty ;
+                        rdfs:domain sri4weather:WeatherForcast .
+
+###  https://w3id.org/resonance/sri4weather#hasParameter
+sri4weather:hasParameter rdf:type owl:ObjectProperty ;
+                        rdfs:domain sri4weather:WeatherForcast ;
+                        rdfs:range sri4weather:WeatherParameter .
+
+###  https://w3id.org/resonance/sri4weather#hasTimePeriod
+sri4weather:hasTimePeriod rdf:type owl:ObjectProperty ;
+                          rdfs:domain sri4weather:WeatherForcast ;
+                          rdfs:range time:DateTimeInterval .
+
+
+###  https://w3id.org/resonance/sri4weather#isMeasuredIn
+sri4weather:isMeasuredIn rdf:type owl:ObjectProperty .
+
+
+###  https://w3id.org/resonance/sri4weather#isProvidedBy
+sri4weather:isProvidedBy rdf:type owl:ObjectProperty ;
+                         owl:inverseOf sri4weather:provides ;
+                         rdfs:domain sri4weather:WeatherServiceProvider ;
+                         rdfs:range sri4weather:WeatherForcast .
+
+
+###  https://w3id.org/resonance/sri4weather#provides
+sri4weather:provides rdf:type owl:ObjectProperty ;
+                     rdfs:domain sri4weather:WeatherForcast ;
+                     rdfs:range sri4weather:WeatherServiceProvider .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://w3id.org/resonance/sri4weather#forcastSource
+sri4weather:forcastSource rdf:type owl:DatatypeProperty ;
+                          rdfs:domain sri4weather:WeatherForcast .
+
+
+###  https://w3id.org/resonance/sri4weather#identifier
+sri4weather:identifier rdf:type owl:DatatypeProperty ;
+                       rdfs:domain sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#name
+sri4weather:name rdf:type owl:DatatypeProperty ;
+                 rdfs:domain sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#retrievalTime
+sri4weather:retrievalTime rdf:type owl:DatatypeProperty ;
+                          rdfs:domain sri4weather:WeatherForcast .
+
+
+###  https://w3id.org/resonance/sri4weather#startTime
+sri4weather:startTime rdf:type owl:DatatypeProperty ;
+                      rdfs:domain sri4weather:WeatherForcast .
+
+
+###  https://w3id.org/resonance/sri4weather#timeStamp
+sri4weather:timeStamp rdf:type owl:DatatypeProperty ;
+                      rdfs:domain sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#value
+sri4weather:value rdf:type owl:DatatypeProperty ;
+                  rdfs:domain sri4weather:WeatherParameter .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.w3.org/2006/time#DateTimeInterval
+time:DateTimeInterval rdf:type owl:Class .
+
+
+###  https://w3id.org/bot#Zone
+<https://w3id.org/bot#Zone> rdf:type owl:Class .
+
+
+###  https://w3id.org/resonance/sri4weather#Clouds
+sri4weather:Clouds rdf:type owl:Class ;
+                   rdfs:subClassOf sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#DewPoint
+sri4weather:DewPoint rdf:type owl:Class ;
+                     rdfs:subClassOf sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#FeelsLike
+sri4weather:FeelsLike rdf:type owl:Class ;
+                      rdfs:subClassOf sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#Humidity
+sri4weather:Humidity rdf:type owl:Class ;
+                     rdfs:subClassOf sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#Pop
+sri4weather:Pop rdf:type owl:Class ;
+                rdfs:subClassOf sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#Pressure
+sri4weather:Pressure rdf:type owl:Class ;
+                     rdfs:subClassOf sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#Temperature
+sri4weather:Temperature rdf:type owl:Class ;
+                        rdfs:subClassOf sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#UVI
+sri4weather:UVI rdf:type owl:Class ;
+                rdfs:subClassOf sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#WeatherForcast
+sri4weather:WeatherForcast rdf:type owl:Class ;
+                           rdfs:comment " "@en ;
+                           rdfs:label "Weather Forcast" ;
+                           rdfs:seeAlso <https://w3id.org/resonance/sri4weather/> .
+
+
+###  https://w3id.org/resonance/sri4weather#WeatherParameter
+sri4weather:WeatherParameter rdf:type owl:Class ;
+                             rdfs:comment " "@en ;
+                             rdfs:label "Weather Parameter" ;
+                             rdfs:seeAlso <https://w3id.org/resonance/sri4weather/> .
+
+
+###  https://w3id.org/resonance/sri4weather#WeatherServiceProvider
+sri4weather:WeatherServiceProvider rdf:type owl:Class ;
+                                   rdfs:comment " "@en ;
+                                   rdfs:label "Weather Service Provider" ;
+                                   rdfs:seeAlso <https://w3id.org/resonance/sri4weather/> .
+
+
+###  https://w3id.org/resonance/sri4weather#WindDeg
+sri4weather:WindDeg rdf:type owl:Class ;
+                    rdfs:subClassOf sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#WindGust
+sri4weather:WindGust rdf:type owl:Class ;
+                     rdfs:subClassOf sri4weather:WeatherParameter .
+
+
+###  https://w3id.org/resonance/sri4weather#WindSpeed
+sri4weather:WindSpeed rdf:type owl:Class ;
+                      rdfs:subClassOf sri4weather:WeatherParameter .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
+
