@@ -1,0 +1,68 @@
+@prefix resource: <http://w3id.org/resonance/resource/> .
+@prefix sri4all: <https://w3id.org/resonance/SRI4ALL#> .
+@prefix sri4pv: <https://w3id.org/resonance/SRI4PV#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+resource:PE7W-G97K-HWKP-P8EE_129 a sri4pv:Photovoltaic ;
+    sri4all:hasMeasurement resource:PE7W-G97K-HWKP-P8EE_129_battery_current_value,
+        resource:PE7W-G97K-HWKP-P8EE_129_battery_voltage_value,
+        resource:PE7W-G97K-HWKP-P8EE_129_pv_current_value,
+        resource:PE7W-G97K-HWKP-P8EE_129_pv_voltage_value ;
+    sri4all:hasPowerMeasurement resource:PE7W-G97K-HWKP-P8EE_129_battery_active_power_value,
+        resource:PE7W-G97K-HWKP-P8EE_129_grid_active_power_value,
+        resource:PE7W-G97K-HWKP-P8EE_129_inverter_active_power_value,
+        resource:PE7W-G97K-HWKP-P8EE_129_pv_active_power_value .
+
+resource:PE7W-G97K-HWKP-P8EE_129_battery_active_power_value a sri4all:PowerMeasurement ;
+    sri4all:hasPowerProperty resource:PE7W-G97K-HWKP-P8EE_129_battery_active_power_value_property ;
+    sri4all:hasUnitOfMeasurment unit:W ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "-35.55555555555556"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_129_battery_active_power_value_property a sri4all:ActivePower .
+
+resource:PE7W-G97K-HWKP-P8EE_129_battery_current_value a sri4all:Current ;
+    sri4all:hasUnitOfMeasurment unit:Ampere ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "-0.16049382716049382"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_129_battery_voltage_value a sri4all:Voltage ;
+    sri4all:hasUnitOfMeasurment unit:V ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "217.21605172839506"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_129_grid_active_power_value a sri4all:PowerMeasurement ;
+    sri4all:hasPowerProperty resource:PE7W-G97K-HWKP-P8EE_129_grid_active_power_value_property ;
+    sri4all:hasUnitOfMeasurment unit:W ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "-8293.5"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_129_grid_active_power_value_property a sri4all:ActivePower .
+
+resource:PE7W-G97K-HWKP-P8EE_129_inverter_active_power_value a sri4all:PowerMeasurement ;
+    sri4all:hasPowerProperty resource:PE7W-G97K-HWKP-P8EE_129_inverter_active_power_value_property ;
+    sri4all:hasUnitOfMeasurment unit:W ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "-8408.962962962964"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_129_inverter_active_power_value_property a sri4all:ActivePower .
+
+resource:PE7W-G97K-HWKP-P8EE_129_pv_active_power_value a sri4all:PowerMeasurement ;
+    sri4all:hasPowerProperty resource:PE7W-G97K-HWKP-P8EE_129_pv_active_power_value_property ;
+    sri4all:hasUnitOfMeasurment unit:W ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "-8729.25"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_129_pv_active_power_value_property a sri4all:ActivePower .
+
+resource:PE7W-G97K-HWKP-P8EE_129_pv_current_value a sri4all:Current ;
+    sri4all:hasUnitOfMeasurment unit:Ampere ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "-14.74625"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_129_pv_voltage_value a sri4all:Voltage ;
+    sri4all:hasUnitOfMeasurment unit:V ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "588.32875"^^xsd:float .
+

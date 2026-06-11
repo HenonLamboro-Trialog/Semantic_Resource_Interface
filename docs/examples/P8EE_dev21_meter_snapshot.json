@@ -1,0 +1,57 @@
+{
+  "resource_id": "PE7W-G97K-HWKP-P8EE_21",
+  "device_type": "EE_METER_ISKRA_AM550",
+  "current_l2": {
+    "value": -11.739244186046513,
+    "unit": "Ampere"
+  },
+  "active_power": {
+    "value": -8267.296511627907,
+    "unit": "W"
+  },
+  "import_active_power_15_minute_average": {
+    "value": 0.0,
+    "unit": "W"
+  },
+  "import_active_power": {
+    "value": 0.0,
+    "unit": "W"
+  },
+  "export_active_power_1_minute_average": {
+    "value": 8509.127906976744,
+    "unit": "W"
+  },
+  "current_l1": {
+    "value": -11.953255813953488,
+    "unit": "Ampere"
+  },
+  "import_active_power_1_minute_average": {
+    "value": 0.0,
+    "unit": "W"
+  },
+  "voltage_l1": {
+    "value": 236.31860465116281,
+    "unit": "V"
+  },
+  "export_active_power": {
+    "value": 8267.296511627907,
+    "unit": "W"
+  },
+  "voltage_l2": {
+    "value": 237.12790697674419,
+    "unit": "V"
+  },
+  "current_l3": {
+    "value": -11.90046511627907,
+    "unit": "Ampere"
+  },
+  "export_active_power_15_minute_average": {
+    "value": 7764.343023255814,
+    "unit": "W"
+  },
+  "voltage_l3": {
+    "value": 235.7843023255814,
+    "unit": "V"
+  },
+  "timestamp": "2026-06-11T13:15:00"
+}
