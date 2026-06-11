@@ -30,6 +30,25 @@ def normalize_key(sensor_name):
     return key.strip("_")
 
 
+# raiprogramming unit symbol -> qudt vocab/unit individual name.
+# Unknown symbols pass through unchanged.
+_UNIT_MAP = {
+    "W": "W", "kW": "KiloW",
+    "Wh": "W-HR", "kWh": "KiloW-HR",
+    "V": "V", "A": "Ampere",
+    "VAr": "V-A_Reactive", "Hz": "Hertz",
+    "%": "PERCENT",
+    "°C": "DEG_C", "C": "DEG_C",
+}
+
+
+def normalize_unit(unit):
+    """Map a raiprogramming unit symbol to a qudt unit name (passthrough if unknown)."""
+    if unit is None:
+        return None
+    return _UNIT_MAP.get(unit, unit)
+
+
 def _is_number(value):
     return isinstance(value, (int, float)) and not isinstance(value, bool)
 
@@ -37,7 +56,12 @@ def _is_number(value):
 def device_snapshot(household, device_id, stat="avg"):
     """Build a latest-value snapshot dict for one device."""
     aggregates = household.get_aggregates(device_id)
-    device = household.devices_by_id.get(device_id, {})
+    # device ids are ints in devices_by_id; the CLI may pass a string.
+    by_id = household.devices_by_id
+    device = by_id.get(device_id)
+    if device is None and isinstance(device_id, str) and device_id.isdigit():
+        device = by_id.get(int(device_id))
+    device = device or {}
 
     snapshot = {
         "resource_id": f"{household.hems}_{device_id}",
@@ -52,7 +76,7 @@ def device_snapshot(household, device_id, stat="avg"):
         last = numeric[-1]
         snapshot[normalize_key(sensor_name)] = {
             "value": last[stat],
-            "unit": mdata.get("unit"),
+            "unit": normalize_unit(mdata.get("unit")),
         }
         bt = last.get("bt")
         if bt and (latest_ts is None or bt > latest_ts):

@@ -27,6 +27,30 @@ is pure and testable with a fake household.
 This snapshot is then converted to RDF by `semantic_mapper.semanticise_data` using
 a mapping such as `Mappings/raiprogramming_meter.yaml` (ontology-conformant).
 
+## `tools/convert.py` — live convert CLI
+
+Fetches a live device snapshot and converts it to RDF, auto-detecting the
+mapping by snapshot shape (or use `--mapping`). Needs `raiprogramming` on the
+path (`PYTHONPATH=..`) and its PCS certificate config.
+
+```bash
+# auto-detect mapping, print Turtle
+PYTHONPATH=.. python -m tools.convert --hems PE7W-G97K-HWKP-P8EE --device 21
+
+# heat pump -> file
+PYTHONPATH=.. python -m tools.convert -e PE7W-G97K-HWKP-P8EE -d 35 \
+    --mapping Mappings/raiprogramming_hvac.yaml --out hvac.ttl
+
+# just the JSON snapshot the adapter produced
+PYTHONPATH=.. python -m tools.convert -e PE7W-G97K-HWKP-P8EE -d 129 --snapshot-only
+```
+
+Verified live on hems `PE7W-...-P8EE`: device 21 (meter) → PowerDevice +
+Power/Voltage/Current; device 35 (heat pump) → HeatPump + TemperatureMeasurement
+×5 + Power; device 129 (hybrid inverter) → Photovoltaic + Power/Voltage/Current.
+Mappings: `raiprogramming_meter.yaml`, `raiprogramming_hvac.yaml`,
+`raiprogramming_pv.yaml` (all lint clean against the diagram-synced ontology).
+
 ## `tools/mapping_linter.py` — ontology-conformance linter
 
 Checks that every term a YAML mapping references is actually defined in the
