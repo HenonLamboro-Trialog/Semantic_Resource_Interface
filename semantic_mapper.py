@@ -144,7 +144,9 @@ def semanticise_data(data, mapping, base_uri, graph=None):
             if "unit_path" in meas:
                 unit_val = resolve_path(item, meas["unit_path"])
                 if unit_val:
-                    unit_pred = get_uri(namespaces, {"prefix": "sri4all", "name": "hasUnitOfMeasurment"})
+                    unit_pred = get_uri(namespaces, meas.get(
+                        "unit_predicate",
+                        {"prefix": "sri4all", "name": "hasUnitOfMeasurment"}))
                     u_prefix = meas.get("unit_prefix")
                     if u_prefix and u_prefix in namespaces:
                         g.add((measurement_uri, unit_pred, URIRef(f"{namespaces[u_prefix]}{unit_val}")))
@@ -171,7 +173,9 @@ def semanticise_data(data, mapping, base_uri, graph=None):
             if "timestamp_path" in meas:
                 ts_val = resolve_path(item, meas["timestamp_path"])
                 if ts_val:
-                    ts_pred = get_uri(namespaces, {"prefix": "sri4all", "name": "timeStamp"})
+                    ts_pred = get_uri(namespaces, meas.get(
+                        "timestamp_predicate",
+                        {"prefix": "sri4all", "name": "timeStamp"}))
                     ts_datatype = DATATYPE_MAP.get(meas.get("timestamp_datatype", "dateTime"), XSD.dateTime)
                     g.add((measurement_uri, ts_pred, Literal(ts_val, datatype=ts_datatype)))
 
