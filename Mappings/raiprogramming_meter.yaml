@@ -1,12 +1,15 @@
 schema_name: raiprogramming_meter
 
-# Ontology-conformant mapping for a raiprogramming electricity meter snapshot
-# (e.g. EE_METER_ISKRA_AM550), produced by adapters/raiprogramming/source.py.
+# Mapping for a raiprogramming electricity-meter snapshot (e.g. EE_METER_ISKRA_AM550)
+# produced by adapters/raiprogramming/source.py.
 #
-# Every term below is defined in RESONANCE-Ontology (verified by
-# tools.mapping_linter). Only power quantities are mapped: the ontology has no
-# Voltage / Current / Energy measurement classes yet, so those sensors are left
-# out on purpose (see docs/ontology-conformance-gap-report.md).
+# Vocabulary follows the RESONANCE-Ontology DIAGRAM (Diagrams/sri4all.png,
+# the current source of truth per the ontology owner), which uses
+# sri4all:value / sri4all:timeStamp / sri4all:hasUnitOfMeasurment and the
+# hasPowerMeasurement / hasEnergyMeasurement relations. These match the SRI
+# service mapper defaults and the existing power_sensor.yaml. Units are taken
+# from the live snapshot (raw symbols W/V/A/Wh); normalizing them to canonical
+# qudt unit individuals (KiloW, ...) is a follow-up.
 
 prefixes:
   sri4all: "https://w3id.org/resonance/SRI4ALL#"
@@ -14,13 +17,11 @@ prefixes:
   xsd: "http://www.w3.org/2001/XMLSchema#"
   unit: "http://qudt.org/vocab/unit/"
 
-# Lets AUTO-DETECT pick this mapping for meter snapshots.
 match:
   required_fields:
     - resource_id
     - active_power.value
 
-# The meter is a power device that measures power.
 resource:
   id_path: resource_id
   class:
@@ -28,66 +29,95 @@ resource:
     name: PowerDevice
 
 measurements:
-  # Active power -> PowerMeasurement with an ActivePower power property.
+  # --- Power (with a typed PowerProperty) -------------------------------
   - path: active_power.value
-    class:
-      prefix: sri4all
-      name: PowerMeasurement
-    relation:
-      prefix: sri4all
-      name: measuresPower
-    value_predicate:
-      prefix: sri4all
-      name: powerValue
+    class: {prefix: sri4all, name: PowerMeasurement}
+    relation: {prefix: sri4all, name: hasPowerMeasurement}
     datatype: float
-
     unit_path: active_power.unit
     unit_prefix: unit
-    unit_predicate:
-      prefix: sri4all
-      name: isMeasuredIn
-
     timestamp_path: timestamp
     timestamp_datatype: dateTime
-    timestamp_predicate:
-      prefix: sri4all
-      name: timestamp
+    property: {prefix: sri4all, name: ActivePower}
+    property_relation: {prefix: sri4all, name: hasPowerProperty}
 
-    property:
-      prefix: sri4all
-      name: ActivePower
-    property_relation:
-      prefix: sri4all
-      name: hasPowerProperty
-
-  # Reactive power -> PowerMeasurement with a ReactivePower power property.
   - path: reactive_power.value
-    class:
-      prefix: sri4all
-      name: PowerMeasurement
-    relation:
-      prefix: sri4all
-      name: measuresPower
-    value_predicate:
-      prefix: sri4all
-      name: powerValue
+    class: {prefix: sri4all, name: PowerMeasurement}
+    relation: {prefix: sri4all, name: hasPowerMeasurement}
     datatype: float
-
     unit_path: reactive_power.unit
     unit_prefix: unit
-    unit_predicate:
-      prefix: sri4all
-      name: isMeasuredIn
-
     timestamp_path: timestamp
     timestamp_datatype: dateTime
-    timestamp_predicate:
-      prefix: sri4all
-      name: timestamp
+    property: {prefix: sri4all, name: ReactivePower}
+    property_relation: {prefix: sri4all, name: hasPowerProperty}
 
-    property:
-      prefix: sri4all
-      name: ReactivePower
-    property_relation:
-      prefix: sri4all
-      name: hasPowerProperty
+  # --- Voltage ----------------------------------------------------------
+  - path: voltage_l1.value
+    class: {prefix: sri4all, name: Voltage}
+    relation: {prefix: sri4all, name: hasMeasurement}
+    datatype: float
+    unit_path: voltage_l1.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+  - path: voltage_l2.value
+    class: {prefix: sri4all, name: Voltage}
+    relation: {prefix: sri4all, name: hasMeasurement}
+    datatype: float
+    unit_path: voltage_l2.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+  - path: voltage_l3.value
+    class: {prefix: sri4all, name: Voltage}
+    relation: {prefix: sri4all, name: hasMeasurement}
+    datatype: float
+    unit_path: voltage_l3.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+
+  # --- Current ----------------------------------------------------------
+  - path: current_l1.value
+    class: {prefix: sri4all, name: Current}
+    relation: {prefix: sri4all, name: hasMeasurement}
+    datatype: float
+    unit_path: current_l1.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+  - path: current_l2.value
+    class: {prefix: sri4all, name: Current}
+    relation: {prefix: sri4all, name: hasMeasurement}
+    datatype: float
+    unit_path: current_l2.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+  - path: current_l3.value
+    class: {prefix: sri4all, name: Current}
+    relation: {prefix: sri4all, name: hasMeasurement}
+    datatype: float
+    unit_path: current_l3.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+
+  # --- Energy -----------------------------------------------------------
+  - path: import_active_energy.value
+    class: {prefix: sri4all, name: EnergyMeasurement}
+    relation: {prefix: sri4all, name: hasEnergyMeasurement}
+    datatype: float
+    unit_path: import_active_energy.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+  - path: export_active_energy.value
+    class: {prefix: sri4all, name: EnergyMeasurement}
+    relation: {prefix: sri4all, name: hasEnergyMeasurement}
+    datatype: float
+    unit_path: export_active_energy.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
