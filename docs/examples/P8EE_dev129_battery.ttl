@@ -1,0 +1,43 @@
+# mapping: Mappings/raiprogramming_battery.yaml
+@prefix resource: <http://w3id.org/resonance/resource/> .
+@prefix sri4all: <https://w3id.org/resonance/SRI4ALL#> .
+@prefix sri4storage: <https://w3id.org/resonance/SRI4Storage#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+resource:PE7W-G97K-HWKP-P8EE_129 a sri4storage:Battery ;
+    sri4all:hasMeasurement resource:PE7W-G97K-HWKP-P8EE_129_battery_current_value,
+        resource:PE7W-G97K-HWKP-P8EE_129_battery_voltage_value ;
+    sri4all:hasPowerMeasurement resource:PE7W-G97K-HWKP-P8EE_129_battery_active_power_value ;
+    sri4storage:hasCapacity resource:PE7W-G97K-HWKP-P8EE_129_battery_capacity_value ;
+    sri4storage:hasStateOfCharge resource:PE7W-G97K-HWKP-P8EE_129_battery_state_of_charge_value .
+
+resource:PE7W-G97K-HWKP-P8EE_129_battery_active_power_value a sri4all:PowerMeasurement ;
+    sri4all:hasPowerProperty resource:PE7W-G97K-HWKP-P8EE_129_battery_active_power_value_property ;
+    sri4all:hasUnitOfMeasurment unit:W ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "-1.875"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_129_battery_active_power_value_property a sri4all:ActivePower .
+
+resource:PE7W-G97K-HWKP-P8EE_129_battery_capacity_value a sri4storage:Capacity ;
+    sri4all:hasUnitOfMeasurment unit:W-HR ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "20600.0"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_129_battery_current_value a sri4all:Current ;
+    sri4all:hasUnitOfMeasurment unit:Ampere ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "-0.01575"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_129_battery_state_of_charge_value a sri4storage:StateOfCharge ;
+    sri4all:hasUnitOfMeasurment unit:PERCENT ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "100.0"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_129_battery_voltage_value a sri4all:Voltage ;
+    sri4all:hasUnitOfMeasurment unit:V ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "216.43500062500001"^^xsd:float .
+
+
