@@ -1,0 +1,28 @@
+@prefix resource: <http://w3id.org/resonance/resource/> .
+@prefix sri4all: <https://w3id.org/resonance/SRI4ALL#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+resource:PE7W-G97K-HWKP-P8EE_82 a sri4all:PowerDevice ;
+    sri4all:hasEnergyMeasurement resource:PE7W-G97K-HWKP-P8EE_82_import_active_energy_session_value ;
+    sri4all:hasMeasurement resource:PE7W-G97K-HWKP-P8EE_82_current_l1_value ;
+    sri4all:hasPowerMeasurement resource:PE7W-G97K-HWKP-P8EE_82_active_power_value .
+
+resource:PE7W-G97K-HWKP-P8EE_82_active_power_value a sri4all:PowerMeasurement ;
+    sri4all:hasPowerProperty resource:PE7W-G97K-HWKP-P8EE_82_active_power_value_property ;
+    sri4all:hasUnitOfMeasurment unit:W ;
+    sri4all:timeStamp "2026-06-11T13:16:00"^^xsd:dateTime ;
+    sri4all:value "0.0"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_82_active_power_value_property a sri4all:ActivePower .
+
+resource:PE7W-G97K-HWKP-P8EE_82_current_l1_value a sri4all:Current ;
+    sri4all:hasUnitOfMeasurment unit:Ampere ;
+    sri4all:timeStamp "2026-06-11T13:16:00"^^xsd:dateTime ;
+    sri4all:value "0.0"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_82_import_active_energy_session_value a sri4all:EnergyMeasurement ;
+    sri4all:hasUnitOfMeasurment unit:W-HR ;
+    sri4all:timeStamp "2026-06-11T13:16:00"^^xsd:dateTime ;
+    sri4all:value "1946.0"^^xsd:float .
+

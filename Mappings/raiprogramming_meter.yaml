@@ -21,6 +21,7 @@ match:
   required_fields:
     - resource_id
     - active_power.value
+    - voltage_l1.value
 
 resource:
   id_path: resource_id

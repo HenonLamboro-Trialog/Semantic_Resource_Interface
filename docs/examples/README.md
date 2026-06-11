@@ -13,6 +13,13 @@ PYTHONPATH=.. python -m tools.convert --hems PE7W-G97K-HWKP-P8EE --device <id> [
 | `P8EE_dev21_meter_snapshot.json` | 21 | — | the JSON snapshot the adapter built (pre-RDF) |
 | `P8EE_dev35_hvac.ttl` | 35 — Kronoterm heat pump | `raiprogramming_hvac` | HeatPump + 5× TemperatureMeasurement (outdoor/supply/return/sanitary/room) + power |
 | `P8EE_dev129_pv.ttl` | 129 — Deye hybrid inverter | `raiprogramming_pv` | Photovoltaic + 4× PowerMeasurement (PV/inverter/grid/battery) + Voltage + Current |
+| `P8EE_dev124_meter_chint.ttl` | 124 — Chint DTSU666 meter | `raiprogramming_meter` | PowerDevice + active & reactive power + 3× Voltage + 3× Current |
+| `P8EE_dev82_charger.ttl` | 82 — OCPP EV charger | `raiprogramming_charger` | PowerDevice + active power + current + session energy |
+| `P8EE_dev116_sensor.ttl` | 116 — Shelly H&T | `raiprogramming_sensor` | saref:Sensor + TemperatureMeasurement + sri4weather:Humidity |
+
+EV chargers are modelled as `sri4all:PowerDevice` for now — the ontology has no
+EVSE/Connector/ChargingStation classes yet (SRI4EV would be a separate task).
+Device 342 (Vilion battery) exposes no numeric telemetry, so it has no example.
 
 Vocabulary follows the SRI4ALL diagram (`RESONANCE-Ontology/Diagrams/sri4all.png`):
 `sri4all:value`, `sri4all:timeStamp`, `sri4all:hasUnitOfMeasurment`, and the

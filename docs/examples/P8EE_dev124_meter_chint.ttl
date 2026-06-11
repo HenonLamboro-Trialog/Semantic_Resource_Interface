@@ -1,0 +1,61 @@
+@prefix resource: <http://w3id.org/resonance/resource/> .
+@prefix sri4all: <https://w3id.org/resonance/SRI4ALL#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+resource:PE7W-G97K-HWKP-P8EE_124 a sri4all:PowerDevice ;
+    sri4all:hasMeasurement resource:PE7W-G97K-HWKP-P8EE_124_current_l1_value,
+        resource:PE7W-G97K-HWKP-P8EE_124_current_l2_value,
+        resource:PE7W-G97K-HWKP-P8EE_124_current_l3_value,
+        resource:PE7W-G97K-HWKP-P8EE_124_voltage_l1_value,
+        resource:PE7W-G97K-HWKP-P8EE_124_voltage_l2_value,
+        resource:PE7W-G97K-HWKP-P8EE_124_voltage_l3_value ;
+    sri4all:hasPowerMeasurement resource:PE7W-G97K-HWKP-P8EE_124_active_power_value,
+        resource:PE7W-G97K-HWKP-P8EE_124_reactive_power_value .
+
+resource:PE7W-G97K-HWKP-P8EE_124_active_power_value a sri4all:PowerMeasurement ;
+    sri4all:hasPowerProperty resource:PE7W-G97K-HWKP-P8EE_124_active_power_value_property ;
+    sri4all:hasUnitOfMeasurment unit:W ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "15.122448979591837"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_124_active_power_value_property a sri4all:ActivePower .
+
+resource:PE7W-G97K-HWKP-P8EE_124_current_l1_value a sri4all:Current ;
+    sri4all:hasUnitOfMeasurment unit:Ampere ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "0.20682993197278912"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_124_current_l2_value a sri4all:Current ;
+    sri4all:hasUnitOfMeasurment unit:Ampere ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "0.11876870748299319"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_124_current_l3_value a sri4all:Current ;
+    sri4all:hasUnitOfMeasurment unit:Ampere ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "0.00029931972789115646"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_124_reactive_power_value a sri4all:PowerMeasurement ;
+    sri4all:hasPowerProperty resource:PE7W-G97K-HWKP-P8EE_124_reactive_power_value_property ;
+    sri4all:hasUnitOfMeasurment unit:V-A_Reactive ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "-46.68027210884354"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_124_reactive_power_value_property a sri4all:ReactivePower .
+
+resource:PE7W-G97K-HWKP-P8EE_124_voltage_l1_value a sri4all:Voltage ;
+    sri4all:hasUnitOfMeasurment unit:V ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "236.6857142857143"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_124_voltage_l2_value a sri4all:Voltage ;
+    sri4all:hasUnitOfMeasurment unit:V ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "237.94285714285712"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_124_voltage_l3_value a sri4all:Voltage ;
+    sri4all:hasUnitOfMeasurment unit:V ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "237.12721088435373"^^xsd:float .
+
