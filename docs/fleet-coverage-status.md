@@ -8,14 +8,15 @@ fetches). Raw run in `fleet-coverage-report.txt`.
 
 ## Headline
 
-| Metric | First audit | After extensions | 
-|---|---|---|
-| Device types with a mapping | 23 / 39 | **27 / 39** |
-| Device types with **no** mapping | 16 | **12** (of which **3 have no telemetry** → 9 real gaps) |
-| Devices with a mapping | ~118 | **~129 / 145 (89%)** |
+| Metric | First audit | + mappings | + sensor-alias layer |
+|---|---|---|---|
+| Device types with a mapping | 23 / 39 | 27 / 39 | **30 / 39** |
+| Device types with **no** mapping | 16 | 12 | **9** (of which **3 have no telemetry** → 6 real gaps) |
+| Devices with a mapping | ~118 | ~129 | **~132 / 145 (91%)** |
 
-Biggest win: **SOLAR_SOLAREDGE** (19 devices across **19 households**) went from
-unmapped to fully auto-detected via `raiprogramming_pv_string`.
+Biggest wins: **SOLAR_SOLAREDGE** (19 devices / 19 households) via
+`raiprogramming_pv_string`; pure batteries (`BATTERY_CET`, `BATTERY_HOY`) and the
+NIBE heat pump now covered via the sensor-alias layer (no new mappings).
 
 ## Extensions made (this round)
 
@@ -31,25 +32,34 @@ unmapped to fully auto-detected via `raiprogramming_pv_string`.
   Austa) — live-verified on a reporting SolarEdge.
 - (existing: meter, hvac, pv-hybrid, charger, sensor)
 
+**Source adapter**
+- **Sensor-alias layer** (`canonical_key`) — collapses *unambiguous* vendor sensor
+  names onto canonical keys (`state_of_charge → battery_state_of_charge`,
+  `outdoor_temperature → outdoor_temp`, …) so one mapping covers a device family
+  across vendors. Ambiguous names (e.g. `active_power`, which differs on a meter
+  vs a battery) are deliberately **not** aliased.
+- Unit normalization + `frequency → sri4all:Frequency` on the meter mapping.
+
 **Tooling**
 - `tools/fleet_audit.py` — this coverage audit.
 
-## Remaining gaps (12 uncovered types)
+## Remaining gaps (9 uncovered types)
+
+The sensor-alias layer resolved the battery (`BATTERY_CET`, `BATTERY_HOY`) and
+NIBE heat-pump variants. What's left:
 
 ### A. No numeric telemetry — nothing to convert (3)
 `HEAT_PUMP_KRONOTERM_TT3000`, `HYBRID_VILION_ENERARK`, `EE_METER_SANGXING_S34U18`
 — expose no sensors with units. Not a mapping gap; flagged for data/integration.
 
-### B. Naming variants of an already-covered family (sensor-name fragmentation) (6)
-The physical device is covered, but a different vendor's sensor names don't match
-the mapping's `path`s. Needs either per-variant mappings or a **sensor-alias
-layer** in the source adapter.
+### B. Match-discriminator edge cases (3)
+Aliasing can't help these — they lack the field a mapping matches on, and a
+single AND-only `match` can't cover both shapes without colliding with another
+mapping.
 | Type | Issue |
 |---|---|
-| `BATTERY_CET_ENERGRID_PEGASUS`, `BATTERY_HOY` | use `state_of_charge` / `capacity_wh` (no `battery_` prefix) — battery mapping expects `battery_state_of_charge` |
-| `SOLAR_DEYE_STRING_3P`, `SOLAR_AUSTA_STRING_3P` | `active_power` + `ac_current_*` but **no `pv_voltage`** — pv_string match requires `pv_voltage` |
-| `HEAT_PUMP_NIBE_S` | `outdoor_temperature` / `room_temperature` — hvac expects `outdoor_temp` |
-| `EMULATION_ELECTRICITY_METER` | `active_power` + `current_*` but **no voltage** — meter match requires `voltage_l1` |
+| `SOLAR_DEYE_STRING_3P`, `SOLAR_AUSTA_STRING_3P` | AC-only string inverters: `active_power` + `ac_current_*` but **no `pv_voltage`**. A DC-less pv_string variant would cover them (kept off the main pv_string match to avoid regressing the DC-only `SOLAR_DEYE_HYBRID`). |
+| `EMULATION_ELECTRICITY_METER` | `active_power` + `current_*` but **no voltage** — meter match requires `voltage_l1` (the meter/charger discriminator). |
 
 ### C. New small mappings / match tweaks (3)
 | Type | Need |
@@ -64,7 +74,7 @@ layer** in the source adapter.
    sensors. Per meter: `import/export_active_power` (directional), `frequency`,
    reactive power/energy, **tariff energies** (`*_tariff_1/2`), and the
    `*_minute_average` variants.
-   - `frequency` → **now mappable** (`sri4all:Frequency` added) — quick win.
+   - `frequency` → **done** (mapped to `sri4all:Frequency` on the meter mapping).
    - directional import/export → needs the diagram's `FlowDirection`
      (production/consumption); blocked on a mapper feature to attach a fixed
      individual via an object property.

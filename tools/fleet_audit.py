@@ -18,7 +18,7 @@ from collections import defaultdict
 
 import yaml
 
-from adapters.raiprogramming.source import normalize_key
+from adapters.raiprogramming.source import canonical_key
 
 
 # --- pure coverage logic ---------------------------------------------------
@@ -69,7 +69,7 @@ def load_mappings(mappings_dir):
 def numeric_keys_for_device(household, device_id):
     """Normalized keys of a device's numeric sensors (those with a unit)."""
     units = household.devices_sensors_unit.get(device_id, {})
-    return {normalize_key(s): u for s, u in units.items()}
+    return {canonical_key(s): u for s, u in units.items()}
 
 
 def audit_household(household, mappings):

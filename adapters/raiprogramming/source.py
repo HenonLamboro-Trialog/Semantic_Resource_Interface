@@ -30,6 +30,29 @@ def normalize_key(sensor_name):
     return key.strip("_")
 
 
+# Sensor-alias layer: collapse vendor-specific sensor names onto the canonical
+# keys the mappings use, so one mapping covers a device family across vendors.
+# Only UNAMBIGUOUS names are aliased — a name that means different things on
+# different device types (e.g. "active power" on a meter vs a battery) is left
+# alone, otherwise it would corrupt the meter/charger/PV mappings.
+_SENSOR_ALIASES = {
+    # pure-battery vendors -> the hybrid battery naming (raiprogramming_battery)
+    "state_of_charge": "battery_state_of_charge",
+    "state_of_health": "battery_state_of_health",
+    "capacity_wh": "battery_capacity",
+    # heat-pump vendors (e.g. NIBE) -> Kronoterm naming (raiprogramming_hvac)
+    "outdoor_temperature": "outdoor_temp",
+    "supply_temperature": "supply_temp",
+    "return_temperature": "return_temp",
+}
+
+
+def canonical_key(sensor_name):
+    """normalize_key + unambiguous vendor-name aliasing."""
+    key = normalize_key(sensor_name)
+    return _SENSOR_ALIASES.get(key, key)
+
+
 # raiprogramming unit symbol -> qudt vocab/unit individual name.
 # Unknown symbols pass through unchanged.
 _UNIT_MAP = {
@@ -74,7 +97,7 @@ def device_snapshot(household, device_id, stat="avg"):
         if not numeric:
             continue
         last = numeric[-1]
-        snapshot[normalize_key(sensor_name)] = {
+        snapshot[canonical_key(sensor_name)] = {
             "value": last[stat],
             "unit": normalize_unit(mdata.get("unit")),
         }

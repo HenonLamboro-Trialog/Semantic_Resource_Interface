@@ -5,7 +5,7 @@ certificates or the raiprogramming package.
 """
 
 from adapters.raiprogramming.source import (
-    device_snapshot, normalize_key, normalize_unit,
+    device_snapshot, normalize_key, normalize_unit, canonical_key,
 )
 
 
@@ -52,6 +52,36 @@ def test_snapshot_normalizes_units():
     )
     snap = device_snapshot(hh, 35)
     assert snap["outdoor_temp"] == {"value": 8.5, "unit": "DEG_C"}
+
+
+def test_canonical_key_aliases_unambiguous_vendor_variants():
+    # battery state-of-charge / capacity variants -> hybrid canonical naming
+    assert canonical_key("State of charge") == "battery_state_of_charge"
+    assert canonical_key("State of health") == "battery_state_of_health"
+    assert canonical_key("Capacity Wh") == "battery_capacity"
+    # heat-pump variants -> Kronoterm canonical naming
+    assert canonical_key("Outdoor temperature") == "outdoor_temp"
+    assert canonical_key("Supply temperature") == "supply_temp"
+
+
+def test_canonical_key_leaves_ambiguous_names_untouched():
+    # 'Active power' means different things on a meter vs a battery -> never alias
+    assert canonical_key("Active power") == "active_power"
+    assert canonical_key("Voltage L1") == "voltage_l1"
+
+
+def test_snapshot_uses_canonical_keys():
+    # a pure battery exposing 'State of charge' should land under the canonical key
+    hh = FakeHousehold(
+        hems="HEMS1",
+        by_id={9: {"device_id": 9, "device_type": "BATTERY_X"}},
+        aggregates={9: _agg({
+            "State of charge": {"unit": "%", "data": [{"bt": "t1", "avg": 73.0}]},
+        })},
+    )
+    snap = device_snapshot(hh, 9)
+    assert snap["battery_state_of_charge"] == {"value": 73.0, "unit": "PERCENT"}
+    assert "state_of_charge" not in snap
 
 
 def test_snapshot_has_identity_and_per_sensor_value_unit():
