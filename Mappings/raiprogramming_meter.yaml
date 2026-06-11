@@ -105,6 +105,16 @@ measurements:
     timestamp_path: timestamp
     timestamp_datatype: dateTime
 
+  # --- Frequency (sri4all:Frequency, added 2026-06) ---------------------
+  - path: frequency.value
+    class: {prefix: sri4all, name: Frequency}
+    relation: {prefix: sri4all, name: hasMeasurement}
+    datatype: float
+    unit_path: frequency.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+
   # --- Energy -----------------------------------------------------------
   - path: import_active_energy.value
     class: {prefix: sri4all, name: EnergyMeasurement}

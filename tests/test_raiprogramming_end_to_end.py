@@ -31,6 +31,7 @@ SNAPSHOT = {
     "voltage_l1": {"value": 231.7, "unit": "V"},
     "current_l1": {"value": 0.088, "unit": "A"},
     "import_active_energy": {"value": 13652.7, "unit": "Wh"},
+    "frequency": {"value": 50.01, "unit": "Hertz"},
 }
 
 
@@ -70,3 +71,10 @@ def test_voltage_current_and_energy_are_emitted():
     # voltage value carried through
     v = next(iter(g.subjects(RDF.type, SRI.Voltage)))
     assert (v, SRI.value, Literal(231.7, datatype=XSD.float)) in g
+
+
+def test_frequency_is_emitted():
+    g = _graph()
+    f = next(iter(g.subjects(RDF.type, SRI.Frequency)))
+    assert (f, SRI.value, Literal(50.01, datatype=XSD.float)) in g
+    assert (f, SRI.hasUnitOfMeasurment, UNIT.Hertz) in g
