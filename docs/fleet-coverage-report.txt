@@ -2,118 +2,118 @@
 ==================== FLEET COVERAGE BY DEVICE TYPE ====================
 
 SOLAR_SOLAREDGE  (19 devices, 19 households)
-    mapping: — NO MAPPING —   [19 unmatched]
-    unmapped numeric sensors: export_active_power_limit(19), ac_current_l2(16), ac_current_l1(16), ac_voltage_l1(16), max_active_power(16), ac_voltage_l3(16), ac_current_l3(16), ac_voltage_l2(16), active_power(16), export_active_energy(16), pv_voltage(16), min_active_power(16), import_active_power(16), export_active_power(16), pv_current(16)
+    mapping: raiprogramming_pv_string.yaml   [3 unmatched]
+    unmapped numeric sensors: export_active_power_limit(19), max_active_power(16), export_active_power(16), min_active_power(16), import_active_power(16)
 
 EE_METER_ISKRA_AM550  (18 devices, 18 households)
     mapping: raiprogramming_meter.yaml   [11 unmatched]
-    unmapped numeric sensors: import_active_power(15), export_active_power(15), import_active_power_15_minute_average(13), export_active_power_15_minute_average(13), export_active_power_1_minute_average(13), import_active_power_1_minute_average(13), export_active_energy(8), import_active_energy(8), active_power(8), import_reactive_energy(6), export_reactive_energy(6), frequency(3), import_reactive_power(3), export_reactive_power(3)
+    unmapped numeric sensors: export_active_power(15), import_active_power(15), import_active_power_15_minute_average(13), export_active_power_1_minute_average(13), export_active_power_15_minute_average(13), import_active_power_1_minute_average(13), import_active_energy(8), export_active_energy(8), active_power(8), export_reactive_energy(6), import_reactive_energy(6), export_reactive_power(3), frequency(3), import_reactive_power(3)
 
 SOLAR_HUAWEI_SUN2000  (10 devices, 1 households)
-    mapping: raiprogramming_meter.yaml
-    unmapped numeric sensors: export_active_power_limit(10), max_active_power(10), pv_voltage(10), inverter_temperature(10), min_active_power(10), import_active_power(10), export_active_power(10), pv_current(10)
+    mapping: raiprogramming_meter.yaml,raiprogramming_pv_string.yaml
+    unmapped numeric sensors: max_active_power(10), export_active_power(10), min_active_power(10), import_active_power(10), inverter_temperature(10), export_active_power_limit(10)
 
 CHARGER_OCPP_JSON_16  (7 devices, 4 households)
     mapping: raiprogramming_charger.yaml   [4 unmatched]
-    unmapped numeric sensors: per_phase_current_setpoint(7), max_current_per_phase(3), max_active_power(3), min_active_power(3), import_active_power(3), current_l3(2), current_l2(2)
+    unmapped numeric sensors: per_phase_current_setpoint(7), max_active_power(3), min_active_power(3), import_active_power(3), max_current_per_phase(3), current_l2(2), current_l3(2)
 
 SHELLY_HT  (6 devices, 3 households)
     mapping: raiprogramming_sensor.yaml
 
 EE_METER_ISKRA_MT880  (6 devices, 5 households)
     mapping: raiprogramming_meter.yaml   [1 unmatched]
-    unmapped numeric sensors: import_reactive_energy(5), import_active_power(5), frequency(5), export_reactive_energy(5), import_reactive_power(5), export_reactive_power(5), export_active_power(5), import_active_power_15_minute_average(4), export_active_power_15_minute_average(4), export_active_power_1_minute_average(4), import_active_power_1_minute_average(4), import_active_energy_tariff_2(3), export_active_energy_tariff_2(3), import_active_energy_tariff_1(3), export_active_energy_tariff_1(3)
+    unmapped numeric sensors: export_reactive_energy(5), export_reactive_power(5), frequency(5), export_active_power(5), import_reactive_power(5), import_active_power(5), import_reactive_energy(5), import_active_power_15_minute_average(4), export_active_power_1_minute_average(4), export_active_power_15_minute_average(4), import_active_power_1_minute_average(4), export_active_energy_tariff_1(3), import_active_energy_tariff_2(3), import_active_energy_tariff_1(3), export_active_energy_tariff_2(3)
 
 EMS_BOILER  (5 devices, 5 households)
     mapping: raiprogramming_hvac.yaml   [2 unmatched]
-    unmapped numeric sensors: supply_temperature(4), import_active_energy(4), supply_temp_setpoint(4), heat_export_power(3), sanitary_water_temp_setpoint(3), total_heat_energy(2)
+    unmapped numeric sensors: import_active_energy(4), supply_temperature(4), supply_temp_setpoint(4), heat_export_power(3), sanitary_water_temp_setpoint(3), total_heat_energy(2)
 
 EMS_THERMOSTAT  (5 devices, 5 households)
     mapping: raiprogramming_hvac.yaml   [2 unmatched]
-    unmapped numeric sensors: h_c_2_temperature(3), h_c_2_temp_setpoint(3), h_c_1_temp_setpoint(3), h_c_3_temp_setpoint(2), h_c_3_temperature(2), h_c_1_temperature(2)
+    unmapped numeric sensors: h_c_2_temp_setpoint(3), h_c_2_temperature(3), h_c_1_temp_setpoint(3), h_c_3_temperature(2), h_c_3_temp_setpoint(2), h_c_1_temperature(2)
 
 CHARGER_ETREL  (5 devices, 3 households)
     mapping: raiprogramming_charger.yaml
-    unmapped numeric sensors: current_l3(5), max_current_per_phase(5), max_active_power(5), current_l2(5), min_active_power(5), import_active_power(5), per_phase_current_setpoint(5)
+    unmapped numeric sensors: max_active_power(5), per_phase_current_setpoint(5), min_active_power(5), current_l2(5), import_active_power(5), max_current_per_phase(5), current_l3(5)
 
 HEAT_PUMP_KRONOTERM_KSM  (5 devices, 5 households)
     mapping: raiprogramming_hvac.yaml
-    unmapped numeric sensors: h_c_4_room_temp(5), h_c_3_temp(5), h_c_4_temp(5), export_heat_power(5), h_c_2_room_temp(5), h_c_2_temp(5), sanitary_water_comfort_offset(5), h_c_3_temp_setpoint(5), supply_flow(5), load(5), h_c_4_temp_setpoint(5), h_c_1_temp_setpoint(5), sanitary_water_eco_offset(5), storage_eco_offset(5), h_c_2_temp_setpoint(5), fan_rpm(5), pool_temp(5), sanitary_water_temp_setpoint(5), h_c_3_room_temp(5), h_c_1_temp(5), storage_comfort_offset(5)
+    unmapped numeric sensors: h_c_4_temp(5), pool_temp(5), sanitary_water_eco_offset(5), h_c_2_temp(5), h_c_4_room_temp(5), fan_rpm(5), export_heat_power(5), storage_eco_offset(5), h_c_2_room_temp(5), h_c_1_temp_setpoint(5), h_c_3_temp(5), sanitary_water_temp_setpoint(5), h_c_1_temp(5), h_c_3_room_temp(5), supply_flow(5), h_c_4_temp_setpoint(5), storage_comfort_offset(5), h_c_3_temp_setpoint(5), load(5), h_c_2_temp_setpoint(5), sanitary_water_comfort_offset(5)
 
 EE_METER_LANDIS_GYR_E570  (5 devices, 3 households)
     mapping: raiprogramming_meter.yaml
-    unmapped numeric sensors: import_reactive_energy(5), import_active_power_15_minute_average(5), import_active_power(5), frequency(5), export_active_power_15_minute_average(5), export_reactive_energy(5), export_active_power_1_minute_average(5), import_active_power_1_minute_average(5), import_reactive_power(5), export_active_power(5), export_reactive_power(5)
+    unmapped numeric sensors: export_reactive_energy(5), import_active_power_15_minute_average(5), export_reactive_power(5), frequency(5), export_active_power_1_minute_average(5), export_active_power(5), export_active_power_15_minute_average(5), import_reactive_power(5), import_active_power(5), import_active_power_1_minute_average(5), import_reactive_energy(5)
 
 EE_METER_LANDIS_GYR_E450  (5 devices, 5 households)
     mapping: raiprogramming_meter.yaml   [3 unmatched]
-    unmapped numeric sensors: import_reactive_energy(2), import_active_power_15_minute_average(2), import_active_power(2), export_active_power_15_minute_average(2), export_reactive_energy(2), export_active_power_1_minute_average(2), import_active_power_1_minute_average(2), export_active_power(2), frequency(1), import_reactive_power(1), export_reactive_power(1)
+    unmapped numeric sensors: export_reactive_energy(2), import_active_power_15_minute_average(2), export_active_power_1_minute_average(2), export_active_power(2), export_active_power_15_minute_average(2), import_active_power(2), import_active_power_1_minute_average(2), import_reactive_energy(2), export_reactive_power(1), frequency(1), import_reactive_power(1)
 
 HYBRID_ECE_IQBAT  (4 devices, 1 households)
-    mapping: — NO MAPPING —   [4 unmatched]
-    unmapped numeric sensors: battery_export_active_energy(4), grid_current_l2(4), grid_active_power_l3(4), grid_voltage_l1(4), battery_active_power(4), battery_max_active_power(4), battery_max_cell_temperature(4), battery_max_state_of_charge(4), inverter_max_power(4), battery_humidity(4), battery_min_cell_voltage(4), battery_state_of_charge(4), pv_active_power_setpoint(4), grid_apparent_power(4), grid_active_power_l2(4), battery_current(4), battery_min_state_of_charge(4), battery_active_power_setpoint(4), grid_active_power_l1(4), battery_maximum_capacity_kwh(4), battery_min_active_power(4), grid_voltage_l2(4), battery_max_cell_voltage(4), grid_frequency(4), battery_capacity_kwh(4), inverter_active_power(4), grid_reactive_power(4), battery_voltage(4), grid_import_active_energy(4), battery_min_cell_temperature(4), load_import_active_energy(4), load_active_power(4), grid_active_power(4), grid_export_active_energy(4), battery_temperature(4), grid_current_l3(4), grid_voltage_l3(4), battery_import_active_energy(4), inverter_min_power(4), grid_current_l1(4)
+    mapping: raiprogramming_battery.yaml
+    unmapped numeric sensors: battery_min_cell_temperature(4), battery_active_power_setpoint(4), battery_min_cell_voltage(4), battery_min_active_power(4), inverter_min_power(4), pv_active_power_setpoint(4), battery_max_cell_voltage(4), inverter_active_power(4), load_active_power(4), grid_voltage_l3(4), battery_max_active_power(4), grid_active_power(4), battery_humidity(4), load_import_active_energy(4), battery_temperature(4), grid_active_power_l1(4), battery_max_cell_temperature(4), grid_current_l2(4), grid_import_active_energy(4), inverter_max_power(4), grid_apparent_power(4), grid_reactive_power(4), battery_min_state_of_charge(4), grid_frequency(4), battery_maximum_capacity_kwh(4), battery_max_state_of_charge(4), battery_capacity_kwh(4), grid_active_power_l2(4), grid_current_l3(4), grid_current_l1(4), grid_active_power_l3(4), grid_export_active_energy(4), grid_voltage_l2(4), grid_voltage_l1(4)
 
 EE_METER_AMIBIT_REDUXI_METER  (4 devices, 2 households)
     mapping: raiprogramming_meter.yaml
-    unmapped numeric sensors: import_active_power_15_minute_average(4), export_active_power_15_minute_average(4), export_active_power_1_minute_average(4), import_active_power_1_minute_average(4), import_active_power(4), export_active_power(4)
+    unmapped numeric sensors: import_active_power_15_minute_average(4), export_active_power_1_minute_average(4), export_active_power(4), export_active_power_15_minute_average(4), import_active_power(4), import_active_power_1_minute_average(4)
 
 EE_METER_ISKRA_WM3x6  (3 devices, 2 households)
     mapping: raiprogramming_meter.yaml   [1 unmatched]
-    unmapped numeric sensors: import_reactive_energy(2), import_active_power_15_minute_average(2), import_active_power(2), frequency(2), export_active_power_15_minute_average(2), export_reactive_energy(2), export_active_power_1_minute_average(2), import_active_power_1_minute_average(2), import_reactive_power(2), export_active_power(2), export_reactive_power(2)
+    unmapped numeric sensors: export_reactive_energy(2), import_active_power_15_minute_average(2), export_reactive_power(2), frequency(2), export_active_power_1_minute_average(2), export_active_power(2), export_active_power_15_minute_average(2), import_reactive_power(2), import_active_power(2), import_active_power_1_minute_average(2), import_reactive_energy(2)
 
 SHELLY_1PM  (2 devices, 2 households)
     mapping: raiprogramming_meter.yaml   [1 unmatched]
     unmapped numeric sensors: import_active_power(1)
 
 BATTERY_TAB_HV_ESS_C183_KACO  (2 devices, 1 households)
-    mapping: — NO MAPPING —   [2 unmatched]
-    unmapped numeric sensors: battery_export_active_energy(2), battery_min_active_power(2), battery_active_power(2), min_cell_temp(2), battery_max_cell_voltage(2), battery_state_of_health(2), grid_frequency(2), battery_max_active_power(2), battery_max_soc(2), inverter_max_power(2), battery_voltage(2), battery_maximum_capacity_wh(2), max_cell_temp(2), battery_min_cell_voltage(2), battery_temperature(2), battery_state_of_charge(2), battery_capacity_wh(2), inverter_min_power(2), battery_import_active_energy(2), battery_min_soc(2), battery_current(2), battery_active_power_setpoint(2)
+    mapping: raiprogramming_battery.yaml
+    unmapped numeric sensors: battery_temperature(2), min_cell_temp(2), max_cell_temp(2), battery_active_power_setpoint(2), battery_min_cell_voltage(2), battery_max_soc(2), battery_min_active_power(2), battery_max_active_power(2), battery_maximum_capacity_wh(2), inverter_max_power(2), battery_capacity_wh(2), battery_min_soc(2), inverter_min_power(2), grid_frequency(2), battery_max_cell_voltage(2)
 
 EE_METER_LANDIS_GYR_E660  (2 devices, 2 households)
     mapping: raiprogramming_meter.yaml   [1 unmatched]
-    unmapped numeric sensors: import_active_energy_tariff_2(1), import_active_power_15_minute_average(1), import_reactive_energy(1), frequency(1), export_active_energy_tariff_2(1), export_active_power_15_minute_average(1), export_reactive_energy(1), export_active_power_1_minute_average(1), import_active_power_1_minute_average(1), import_active_power(1), import_reactive_power(1), import_active_energy_tariff_1(1), export_reactive_power(1), export_active_power(1), export_active_energy_tariff_1(1)
+    unmapped numeric sensors: export_active_energy_tariff_1(1), export_reactive_energy(1), import_active_power_15_minute_average(1), export_reactive_power(1), frequency(1), export_active_power_1_minute_average(1), import_active_energy_tariff_2(1), export_active_power_15_minute_average(1), export_active_power(1), import_active_energy_tariff_1(1), import_reactive_power(1), import_active_power(1), export_active_energy_tariff_2(1), import_active_power_1_minute_average(1), import_reactive_energy(1)
 
 EE_METER_ELNET  (2 devices, 1 households)
     mapping: raiprogramming_meter.yaml
-    unmapped numeric sensors: import_active_power_15_minute_average(2), import_active_power(2), frequency(2), export_active_power_15_minute_average(2), export_active_power_1_minute_average(2), import_active_power_1_minute_average(2), import_reactive_power(2), export_active_power(2), export_reactive_power(2)
+    unmapped numeric sensors: import_active_power_15_minute_average(2), frequency(2), export_reactive_power(2), export_active_power_1_minute_average(2), export_active_power_15_minute_average(2), export_active_power(2), import_reactive_power(2), import_active_power(2), import_active_power_1_minute_average(2)
 
 HEAT_PUMP_KRONOTERM_TT3000  (2 devices, 2 households)
     mapping: — NO MAPPING —   [2 unmatched]
 
 EE_METER_LANDIS_GYR_E350  (2 devices, 2 households)
     mapping: raiprogramming_meter.yaml   [1 unmatched]
-    unmapped numeric sensors: import_reactive_energy(1), import_active_power_15_minute_average(1), import_active_power(1), frequency(1), export_active_power_15_minute_average(1), export_reactive_energy(1), export_active_power_1_minute_average(1), import_active_power_1_minute_average(1), import_reactive_power(1), export_active_power(1), export_reactive_power(1)
+    unmapped numeric sensors: export_reactive_energy(1), import_active_power_15_minute_average(1), export_reactive_power(1), frequency(1), export_active_power_1_minute_average(1), export_active_power(1), export_active_power_15_minute_average(1), import_reactive_power(1), import_active_power(1), import_active_power_1_minute_average(1), import_reactive_energy(1)
 
 EE_METER_SOLAREDGE  (2 devices, 2 households)
     mapping: raiprogramming_meter.yaml
-    unmapped numeric sensors: import_active_power_15_minute_average(2), export_active_power_15_minute_average(2), export_active_power_1_minute_average(2), import_active_power_1_minute_average(2), import_active_power(2), export_active_power(2)
+    unmapped numeric sensors: import_active_power_15_minute_average(2), export_active_power_1_minute_average(2), export_active_power_15_minute_average(2), export_active_power(2), import_active_power(2), import_active_power_1_minute_average(2)
 
 SOLAR_DEYE_STRING_3P  (2 devices, 2 households)
     mapping: — NO MAPPING —   [2 unmatched]
-    unmapped numeric sensors: ac_current_l2(1), ac_current_l1(1), export_active_power_limit(1), max_active_power(1), active_power(1), ac_current_l3(1), export_active_energy(1), min_active_power(1), import_active_power(1), export_active_power(1)
+    unmapped numeric sensors: ac_current_l3(1), max_active_power(1), ac_current_l1(1), export_active_power(1), export_active_energy(1), min_active_power(1), import_active_power(1), ac_current_l2(1), active_power(1), export_active_power_limit(1)
 
 EE_METER_CHINT_DTSU666  (2 devices, 2 households)
     mapping: raiprogramming_meter.yaml
-    unmapped numeric sensors: import_active_power_15_minute_average(2), frequency(2), export_active_power_15_minute_average(2), export_active_power_1_minute_average(2), import_active_power_1_minute_average(2), import_active_power(2), export_active_power(2)
+    unmapped numeric sensors: import_active_power_15_minute_average(2), frequency(2), export_active_power_1_minute_average(2), export_active_power(2), export_active_power_15_minute_average(2), import_active_power(2), import_active_power_1_minute_average(2)
 
 EMULATION_ELECTRICITY_METER  (2 devices, 2 households)
     mapping: — NO MAPPING —   [2 unmatched]
-    unmapped numeric sensors: current_l3(2), current_l1(2), import_active_power_15_minute_average(2), active_power(2), current_l2(2), export_active_energy(2), export_active_power_15_minute_average(2), import_active_energy(2), export_active_power_1_minute_average(2), import_active_power_1_minute_average(2), import_active_power(2), export_active_power(2)
+    unmapped numeric sensors: import_active_energy(2), current_l1(2), import_active_power_15_minute_average(2), export_active_power_1_minute_average(2), export_active_power_15_minute_average(2), export_active_power(2), current_l2(2), export_active_energy(2), import_active_power(2), current_l3(2), active_power(2), import_active_power_1_minute_average(2)
 
 SOLAR_KACO  (2 devices, 1 households)
     mapping: raiprogramming_meter.yaml
-    unmapped numeric sensors: input_2_export_active_power(2), import_active_power(2), input_1_export_active_power(2), export_active_power(2), export_active_energy_daily(2)
+    unmapped numeric sensors: input_2_export_active_power(2), export_active_power(2), input_1_export_active_power(2), import_active_power(2), export_active_energy_daily(2)
 
 SOLAR_DEYE_HYBRID_3P_HV  (2 devices, 1 households)
-    mapping: — NO MAPPING —   [2 unmatched]
-    unmapped numeric sensors: max_active_power(2), active_power(2), pv_voltage(2), export_active_energy(2), min_active_power(2), import_active_power(2), export_active_power(2), pv_current(2)
+    mapping: raiprogramming_pv_string.yaml
+    unmapped numeric sensors: min_active_power(2), export_active_power(2), import_active_power(2), max_active_power(2)
 
 EE_METER_DEYE_HYBRID_3P_HV  (2 devices, 1 households)
     mapping: raiprogramming_meter.yaml
-    unmapped numeric sensors: import_active_power_15_minute_average(2), frequency(2), export_active_power_15_minute_average(2), export_active_power_1_minute_average(2), import_active_power_1_minute_average(2), import_active_power(2), export_active_power(2)
+    unmapped numeric sensors: import_active_power_15_minute_average(2), frequency(2), export_active_power_1_minute_average(2), export_active_power(2), export_active_power_15_minute_average(2), import_active_power(2), import_active_power_1_minute_average(2)
 
 HVAC_PEGO_ECP200_BASE  (2 devices, 1 households)
     mapping: — NO MAPPING —   [2 unmatched]
-    unmapped numeric sensors: temperature_upper_limit(2), temperature_difference(2), temperature_setpoint(2), temperature_lower_limit(2), minimal_temperature_alarm(1), evaporator_temperature(1), maximal_temperature_alarm(1), temperature_alarm_delay(1), ambient_temperature(1)
+    unmapped numeric sensors: temperature_difference(2), temperature_setpoint(2), temperature_lower_limit(2), temperature_upper_limit(2), temperature_alarm_delay(1), evaporator_temperature(1), ambient_temperature(1), minimal_temperature_alarm(1), maximal_temperature_alarm(1)
 
 SHELLY_TEMPERATURE_GEN_2  (1 devices, 1 households)
     mapping: — NO MAPPING —   [1 unmatched]
@@ -121,36 +121,36 @@ SHELLY_TEMPERATURE_GEN_2  (1 devices, 1 households)
 
 HEAT_PUMP_AMIBIT_REDUXI_METER  (1 devices, 1 households)
     mapping: raiprogramming_meter.yaml
-    unmapped numeric sensors: import_active_power(1), export_active_power(1)
+    unmapped numeric sensors: export_active_power(1), import_active_power(1)
 
 CHARGER_V2CHARGE_TRYDAN  (1 devices, 1 households)
     mapping: — NO MAPPING —   [1 unmatched]
     unmapped numeric sensors: per_phase_current_setpoint(1)
 
 HYBRID_DEYE_HYBRID_3P_HV  (1 devices, 1 households)
-    mapping: raiprogramming_pv.yaml
-    unmapped numeric sensors: battery_export_active_energy(1), battery_min_active_power(1), battery_state_of_charge(1), battery_capacity(1), inverter_min_power(1), battery_max_active_power(1), battery_max_state_of_charge(1), pv_min_active_power(1), inverter_max_power(1), battery_import_active_energy(1), battery_max_capacity(1), battery_min_state_of_charge(1), load_import_active_energy(1), load_active_power(1)
+    mapping: raiprogramming_battery.yaml,raiprogramming_pv.yaml
+    unmapped numeric sensors: battery_max_state_of_charge(1), load_active_power(1), battery_max_active_power(1), battery_min_active_power(1), inverter_max_power(1), load_import_active_energy(1), pv_min_active_power(1), battery_max_capacity(1), battery_min_state_of_charge(1), inverter_min_power(1)
 
 HYBRID_VILION_ENERARK  (1 devices, 1 households)
     mapping: — NO MAPPING —   [1 unmatched]
 
 BATTERY_CET_ENERGRID_PEGASUS  (1 devices, 1 households)
     mapping: — NO MAPPING —   [1 unmatched]
-    unmapped numeric sensors: state_of_charge(1), export_active_energy(1), capacity_ah(1), active_power_setpoint(1), state_of_health(1), maximum_capacity_wh(1), capacity_wh(1), max_active_power(1), min_soc(1), active_power(1), import_active_energy(1), maximum_capacity_ah(1), max_soc(1), min_active_power(1), import_active_power(1), battery_current(1), export_active_power(1)
+    unmapped numeric sensors: import_active_energy(1), max_active_power(1), capacity_ah(1), export_active_energy(1), min_active_power(1), capacity_wh(1), maximum_capacity_wh(1), active_power(1), state_of_health(1), max_soc(1), battery_current(1), export_active_power(1), active_power_setpoint(1), state_of_charge(1), import_active_power(1), min_soc(1), maximum_capacity_ah(1)
 
 HEAT_PUMP_NIBE_S  (1 devices, 1 households)
     mapping: — NO MAPPING —   [1 unmatched]
-    unmapped numeric sensors: supply_temperature(1), sanitary_water_supply_temp(1), return_temperature(1), sanitary_water_temp(1), outdoor_temperature(1), room_temperature(1)
+    unmapped numeric sensors: room_temperature(1), sanitary_water_temp(1), outdoor_temperature(1), sanitary_water_supply_temp(1), return_temperature(1), supply_temperature(1)
 
 SOLAR_AUSTA_STRING_3P  (1 devices, 1 households)
     mapping: — NO MAPPING —   [1 unmatched]
-    unmapped numeric sensors: ac_current_l2(1), ac_current_l1(1), max_active_power(1), active_power(1), ac_current_l3(1), export_active_energy(1), min_active_power(1), import_active_power(1), export_active_power(1)
+    unmapped numeric sensors: ac_current_l3(1), max_active_power(1), ac_current_l1(1), export_active_power(1), export_active_energy(1), min_active_power(1), import_active_power(1), ac_current_l2(1), active_power(1)
 
 BATTERY_HOY  (1 devices, 1 households)
     mapping: — NO MAPPING —   [1 unmatched]
-    unmapped numeric sensors: grid_voltage_l2(1), grid_voltage_l1(1), grid_frequency(1), state_of_charge(1), export_active_energy(1), battery_voltage(1), active_power_setpoint(1), maximum_capacity_wh(1), grid_active_power(1), capacity_wh(1), battery_temperature(1), max_active_power(1), min_soc(1), active_power(1), import_active_energy(1), grid_voltage_l3(1), max_soc(1), min_active_power(1), import_active_power(1), battery_current(1), export_active_power(1)
+    unmapped numeric sensors: import_active_energy(1), max_active_power(1), battery_temperature(1), export_active_energy(1), min_active_power(1), capacity_wh(1), maximum_capacity_wh(1), active_power(1), max_soc(1), grid_frequency(1), grid_voltage_l3(1), battery_voltage(1), battery_current(1), export_active_power(1), active_power_setpoint(1), state_of_charge(1), grid_active_power(1), import_active_power(1), grid_voltage_l2(1), grid_voltage_l1(1), min_soc(1)
 
 EE_METER_SANGXING_S34U18  (1 devices, 1 households)
     mapping: — NO MAPPING —   [1 unmatched]
 
-Total devices: 145; device types: 39; device types with no mapping: 16
+Total devices: 145; device types: 39; device types with no mapping: 12
