@@ -1,0 +1,68 @@
+schema_name: raiprogramming_battery
+
+# Battery / hybrid-inverter battery section snapshot (e.g. the battery side of
+# HYBRID_DEYE_HYBRID_3P_HV) from adapters/raiprogramming/source.py.
+# Exercises the SRI4Storage module: Battery + StateOfCharge / StateOfHealth /
+# Capacity, reusing SRI4ALL for power/energy/voltage/current.
+#
+# NOTE on auto-detect: a hybrid device also matches raiprogramming_pv
+# (it exposes pv_active_power). For hybrids, select the mapping explicitly
+# (--mapping). Pure battery devices match this mapping unambiguously.
+
+prefixes:
+  sri4all: "https://w3id.org/resonance/SRI4ALL#"
+  sri4storage: "https://w3id.org/resonance/SRI4Storage#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  unit: "http://qudt.org/vocab/unit/"
+
+match:
+  required_fields:
+    - resource_id
+    - battery_state_of_charge.value
+
+resource:
+  id_path: resource_id
+  class: {prefix: sri4storage, name: Battery}
+
+measurements:
+  # --- Storage-specific (SRI4Storage) -----------------------------------
+  - path: battery_state_of_charge.value
+    class: {prefix: sri4storage, name: StateOfCharge}
+    relation: {prefix: sri4storage, name: hasStateOfCharge}
+    datatype: float
+    unit_path: battery_state_of_charge.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+  - path: battery_state_of_health.value
+    class: {prefix: sri4storage, name: StateOfHealth}
+    relation: {prefix: sri4storage, name: hasStateOfHealth}
+    datatype: float
+    unit_path: battery_state_of_health.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+  - path: battery_capacity.value
+    class: {prefix: sri4storage, name: Capacity}
+    relation: {prefix: sri4storage, name: hasCapacity}
+    datatype: float
+    unit_path: battery_capacity.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+
+  # --- Reused SRI4ALL measurements --------------------------------------
+  - path: battery_active_power.value
+    class: {prefix: sri4all, name: PowerMeasurement}
+    relation: {prefix: sri4all, name: hasPowerMeasurement}
+    datatype: float
+    unit_path: battery_active_power.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+    property: {prefix: sri4all, name: ActivePower}
+    property_relation: {prefix: sri4all, name: hasPowerProperty}
+  - {path: battery_voltage.value, class: {prefix: sri4all, name: Voltage}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: battery_voltage.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: battery_current.value, class: {prefix: sri4all, name: Current}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: battery_current.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: battery_import_active_energy.value, class: {prefix: sri4all, name: EnergyMeasurement}, relation: {prefix: sri4all, name: hasEnergyMeasurement}, datatype: float, unit_path: battery_import_active_energy.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: battery_export_active_energy.value, class: {prefix: sri4all, name: EnergyMeasurement}, relation: {prefix: sri4all, name: hasEnergyMeasurement}, datatype: float, unit_path: battery_export_active_energy.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}

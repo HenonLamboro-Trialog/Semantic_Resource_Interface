@@ -1,0 +1,38 @@
+schema_name: raiprogramming_charger
+
+# EV charger snapshot (e.g. CHARGER_OCPP_JSON_16) from
+# adapters/raiprogramming/source.py. The ontology has no EVSE / Connector /
+# ChargingStation classes yet, so the charger is modelled as a sri4all:PowerDevice
+# and its electrical telemetry is mapped with the diagram vocabulary. Full EV
+# semantics (EVSE / session / connector) would use SRI4EV -- a larger task.
+
+prefixes:
+  sri4all: "https://w3id.org/resonance/SRI4ALL#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  unit: "http://qudt.org/vocab/unit/"
+
+match:
+  required_fields:
+    - resource_id
+    - max_current_per_phase.value
+
+resource:
+  id_path: resource_id
+  class: {prefix: sri4all, name: PowerDevice}
+
+measurements:
+  - path: active_power.value
+    class: {prefix: sri4all, name: PowerMeasurement}
+    relation: {prefix: sri4all, name: hasPowerMeasurement}
+    datatype: float
+    unit_path: active_power.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+    property: {prefix: sri4all, name: ActivePower}
+    property_relation: {prefix: sri4all, name: hasPowerProperty}
+
+  - {path: current_l1.value, class: {prefix: sri4all, name: Current}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: current_l1.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+
+  - {path: import_active_energy.value,         class: {prefix: sri4all, name: EnergyMeasurement}, relation: {prefix: sri4all, name: hasEnergyMeasurement}, datatype: float, unit_path: import_active_energy.unit,         unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: import_active_energy_session.value, class: {prefix: sri4all, name: EnergyMeasurement}, relation: {prefix: sri4all, name: hasEnergyMeasurement}, datatype: float, unit_path: import_active_energy_session.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}

@@ -1,0 +1,21 @@
+@prefix resource: <http://w3id.org/resonance/resource/> .
+@prefix saref: <https://saref.etsi.org/core/> .
+@prefix sri4all: <https://w3id.org/resonance/SRI4ALL#> .
+@prefix sri4weather: <https://w3id.org/resonance/SRI4Weather#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+resource:PE7W-G97K-HWKP-P8EE_116 a saref:Sensor ;
+    sri4all:hasMeasurement resource:PE7W-G97K-HWKP-P8EE_116_relative_humidity_value ;
+    sri4all:hasTemperatureMeasurement resource:PE7W-G97K-HWKP-P8EE_116_temperature_value .
+
+resource:PE7W-G97K-HWKP-P8EE_116_relative_humidity_value a sri4weather:Humidity ;
+    sri4all:hasUnitOfMeasurment unit:PERCENT ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "50.39999999999999"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_116_temperature_value a sri4all:TemperatureMeasurement ;
+    sri4all:hasUnitOfMeasurment unit:DEG_C ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "24.699999999999996"^^xsd:float .
+

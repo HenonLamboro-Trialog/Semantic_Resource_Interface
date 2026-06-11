@@ -1,0 +1,67 @@
+# mapping: raiprogramming_pv_string.yaml
+@prefix resource: <http://w3id.org/resonance/resource/> .
+@prefix sri4all: <https://w3id.org/resonance/SRI4ALL#> .
+@prefix sri4pv: <https://w3id.org/resonance/SRI4PV#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+resource:7458-FCV1-0FIK-KOAD_144 a sri4pv:Photovoltaic ;
+    sri4all:hasMeasurement resource:7458-FCV1-0FIK-KOAD_144_ac_current_l1_value,
+        resource:7458-FCV1-0FIK-KOAD_144_ac_current_l2_value,
+        resource:7458-FCV1-0FIK-KOAD_144_ac_current_l3_value,
+        resource:7458-FCV1-0FIK-KOAD_144_ac_voltage_l1_value,
+        resource:7458-FCV1-0FIK-KOAD_144_ac_voltage_l2_value,
+        resource:7458-FCV1-0FIK-KOAD_144_ac_voltage_l3_value,
+        resource:7458-FCV1-0FIK-KOAD_144_pv_current_value,
+        resource:7458-FCV1-0FIK-KOAD_144_pv_voltage_value ;
+    sri4all:hasPowerMeasurement resource:7458-FCV1-0FIK-KOAD_144_active_power_value .
+
+resource:7458-FCV1-0FIK-KOAD_144_ac_current_l1_value a sri4all:Current ;
+    sri4all:hasUnitOfMeasurment unit:Ampere ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "-12.891931818181819"^^xsd:float .
+
+resource:7458-FCV1-0FIK-KOAD_144_ac_current_l2_value a sri4all:Current ;
+    sri4all:hasUnitOfMeasurment unit:Ampere ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "-12.899375"^^xsd:float .
+
+resource:7458-FCV1-0FIK-KOAD_144_ac_current_l3_value a sri4all:Current ;
+    sri4all:hasUnitOfMeasurment unit:Ampere ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "-12.884943181818182"^^xsd:float .
+
+resource:7458-FCV1-0FIK-KOAD_144_ac_voltage_l1_value a sri4all:Voltage ;
+    sri4all:hasUnitOfMeasurment unit:V ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "235.14943181818182"^^xsd:float .
+
+resource:7458-FCV1-0FIK-KOAD_144_ac_voltage_l2_value a sri4all:Voltage ;
+    sri4all:hasUnitOfMeasurment unit:V ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "239.81647727272727"^^xsd:float .
+
+resource:7458-FCV1-0FIK-KOAD_144_ac_voltage_l3_value a sri4all:Voltage ;
+    sri4all:hasUnitOfMeasurment unit:V ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "239.46875"^^xsd:float .
+
+resource:7458-FCV1-0FIK-KOAD_144_active_power_value a sri4all:PowerMeasurement ;
+    sri4all:hasPowerProperty resource:7458-FCV1-0FIK-KOAD_144_active_power_value_property ;
+    sri4all:hasUnitOfMeasurment unit:W ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "-9238.227272727272"^^xsd:float .
+
+resource:7458-FCV1-0FIK-KOAD_144_active_power_value_property a sri4all:ActivePower .
+
+resource:7458-FCV1-0FIK-KOAD_144_pv_current_value a sri4all:Current ;
+    sri4all:hasUnitOfMeasurment unit:Ampere ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "-12.36331418181818"^^xsd:float .
+
+resource:7458-FCV1-0FIK-KOAD_144_pv_voltage_value a sri4all:Voltage ;
+    sri4all:hasUnitOfMeasurment unit:V ;
+    sri4all:timeStamp "2026-06-11T13:45:00"^^xsd:dateTime ;
+    sri4all:value "747.21875"^^xsd:float .
+
+

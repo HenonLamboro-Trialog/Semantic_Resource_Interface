@@ -1,0 +1,39 @@
+schema_name: raiprogramming_hvac
+
+# Heat-pump snapshot (e.g. HEAT_PUMP_KRONOTERM_KSM) from
+# adapters/raiprogramming/source.py. Diagram vocabulary (sri4all). Temperatures
+# -> sri4all:TemperatureMeasurement; electrical power -> sri4all:PowerMeasurement.
+# Units come normalized from the snapshot (°C -> DEG_C, W -> W).
+
+prefixes:
+  sri4all: "https://w3id.org/resonance/SRI4ALL#"
+  sri4building: "https://w3id.org/resonance/SRI4Building#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  unit: "http://qudt.org/vocab/unit/"
+
+match:
+  required_fields:
+    - resource_id
+    - outdoor_temp.value
+
+resource:
+  id_path: resource_id
+  class: {prefix: sri4building, name: HeatPump}
+
+measurements:
+  - {path: outdoor_temp.value,       class: {prefix: sri4all, name: TemperatureMeasurement}, relation: {prefix: sri4all, name: hasTemperatureMeasurement}, datatype: float, unit_path: outdoor_temp.unit,       unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: supply_temp.value,        class: {prefix: sri4all, name: TemperatureMeasurement}, relation: {prefix: sri4all, name: hasTemperatureMeasurement}, datatype: float, unit_path: supply_temp.unit,        unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: return_temp.value,        class: {prefix: sri4all, name: TemperatureMeasurement}, relation: {prefix: sri4all, name: hasTemperatureMeasurement}, datatype: float, unit_path: return_temp.unit,        unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: sanitary_water_temp.value, class: {prefix: sri4all, name: TemperatureMeasurement}, relation: {prefix: sri4all, name: hasTemperatureMeasurement}, datatype: float, unit_path: sanitary_water_temp.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: h_c_1_room_temp.value,    class: {prefix: sri4all, name: TemperatureMeasurement}, relation: {prefix: sri4all, name: hasTemperatureMeasurement}, datatype: float, unit_path: h_c_1_room_temp.unit,    unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+
+  - path: import_active_power.value
+    class: {prefix: sri4all, name: PowerMeasurement}
+    relation: {prefix: sri4all, name: hasPowerMeasurement}
+    datatype: float
+    unit_path: import_active_power.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+    property: {prefix: sri4all, name: ActivePower}
+    property_relation: {prefix: sri4all, name: hasPowerProperty}

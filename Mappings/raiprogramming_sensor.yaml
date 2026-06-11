@@ -1,0 +1,41 @@
+schema_name: raiprogramming_sensor
+
+# Ambient temperature/humidity sensor snapshot (e.g. SHELLY_HT) from
+# adapters/raiprogramming/source.py. Temperature -> sri4all:TemperatureMeasurement;
+# relative humidity -> sri4weather:Humidity. Resource is a saref:Sensor.
+
+prefixes:
+  sri4all: "https://w3id.org/resonance/SRI4ALL#"
+  sri4weather: "https://w3id.org/resonance/SRI4Weather#"
+  saref: "https://saref.etsi.org/core/"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  unit: "http://qudt.org/vocab/unit/"
+
+match:
+  required_fields:
+    - resource_id
+    - temperature.value
+    - relative_humidity.value
+
+resource:
+  id_path: resource_id
+  class: {prefix: saref, name: Sensor}
+
+measurements:
+  - path: temperature.value
+    class: {prefix: sri4all, name: TemperatureMeasurement}
+    relation: {prefix: sri4all, name: hasTemperatureMeasurement}
+    datatype: float
+    unit_path: temperature.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+
+  - path: relative_humidity.value
+    class: {prefix: sri4weather, name: Humidity}
+    relation: {prefix: sri4all, name: hasMeasurement}
+    datatype: float
+    unit_path: relative_humidity.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime

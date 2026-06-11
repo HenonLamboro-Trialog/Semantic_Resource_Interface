@@ -1,0 +1,119 @@
+"""raiprogramming source adapter: PCS aggregates -> JSON snapshot.
+
+Produces a single latest-value snapshot per device, shaped for the YAML
+semantic mapper:
+
+    {
+      "resource_id": "<hems>_<device_id>",
+      "device_type": "EE_METER_ISKRA_AM550",
+      "timestamp": "2026-06-10T13:15:00",
+      "active_power": {"value": -4834.9, "unit": "W"},
+      "voltage_l1":   {"value": 231.7,   "unit": "V"},
+      ...
+    }
+
+Only numeric sensors are included (text sensors like 'State name' and empty
+buckets are dropped). Sensor names are normalized to safe snake_case keys that
+a YAML mapping references by `path`.
+"""
+
+import logging
+import re
+
+log = logging.getLogger(__name__)
+
+
+def normalize_key(sensor_name):
+    """Turn a raiprogramming sensor name into a safe snake_case JSON key."""
+    key = sensor_name.strip().lower()
+    key = re.sub(r"[^a-z0-9]+", "_", key)
+    return key.strip("_")
+
+
+# Sensor-alias layer: collapse vendor-specific sensor names onto the canonical
+# keys the mappings use, so one mapping covers a device family across vendors.
+# Only UNAMBIGUOUS names are aliased — a name that means different things on
+# different device types (e.g. "active power" on a meter vs a battery) is left
+# alone, otherwise it would corrupt the meter/charger/PV mappings.
+_SENSOR_ALIASES = {
+    # pure-battery vendors -> the hybrid battery naming (raiprogramming_battery)
+    "state_of_charge": "battery_state_of_charge",
+    "state_of_health": "battery_state_of_health",
+    "capacity_wh": "battery_capacity",
+    # heat-pump vendors (e.g. NIBE) -> Kronoterm naming (raiprogramming_hvac)
+    "outdoor_temperature": "outdoor_temp",
+    "supply_temperature": "supply_temp",
+    "return_temperature": "return_temp",
+}
+
+
+def canonical_key(sensor_name):
+    """normalize_key + unambiguous vendor-name aliasing."""
+    key = normalize_key(sensor_name)
+    return _SENSOR_ALIASES.get(key, key)
+
+
+# raiprogramming unit symbol -> qudt vocab/unit individual name.
+# Unknown symbols pass through unchanged.
+_UNIT_MAP = {
+    "W": "W", "kW": "KiloW",
+    "Wh": "W-HR", "kWh": "KiloW-HR",
+    "V": "V", "A": "Ampere",
+    "VAr": "V-A_Reactive", "Hz": "Hertz",
+    "%": "PERCENT",
+    "°C": "DEG_C", "C": "DEG_C",
+}
+
+
+def normalize_unit(unit):
+    """Map a raiprogramming unit symbol to a qudt unit name (passthrough if unknown)."""
+    if unit is None:
+        return None
+    return _UNIT_MAP.get(unit, unit)
+
+
+def _is_number(value):
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def device_snapshot(household, device_id, stat="avg"):
+    """Build a latest-value snapshot dict for one device."""
+    aggregates = household.get_aggregates(device_id)
+    # device ids are ints in devices_by_id; the CLI may pass a string.
+    by_id = household.devices_by_id
+    device = by_id.get(device_id)
+    if device is None and isinstance(device_id, str) and device_id.isdigit():
+        device = by_id.get(int(device_id))
+    device = device or {}
+
+    snapshot = {
+        "resource_id": f"{household.hems}_{device_id}",
+        "device_type": device.get("device_type"),
+    }
+
+    latest_ts = None
+    for sensor_name, mdata in aggregates.get("measurements", {}).items():
+        numeric = [p for p in mdata.get("data", []) if _is_number(p.get(stat))]
+        if not numeric:
+            continue
+        last = numeric[-1]
+        snapshot[canonical_key(sensor_name)] = {
+            "value": last[stat],
+            "unit": normalize_unit(mdata.get("unit")),
+        }
+        bt = last.get("bt")
+        if bt and (latest_ts is None or bt > latest_ts):
+            latest_ts = bt
+
+    snapshot["timestamp"] = latest_ts
+    return snapshot
+
+
+def fetch_snapshot(hems, device_id, stat="avg"):
+    """Construct a live Household and return its device snapshot.
+
+    raiprogramming is imported lazily so the offline tests do not require it.
+    """
+    from raiprogramming import Household
+
+    return device_snapshot(Household(hems=hems), device_id, stat=stat)

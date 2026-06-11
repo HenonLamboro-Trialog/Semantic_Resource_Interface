@@ -1,0 +1,54 @@
+schema_name: raiprogramming_pv_string
+
+# PV string-inverter snapshot (e.g. SOLAR_SOLAREDGE, SOLAR_HUAWEI_SUN2000,
+# SOLAR_DEYE_STRING_3P, SOLAR_AUSTA_STRING_3P) from
+# adapters/raiprogramming/source.py. These expose "Active power" + AC
+# voltage/current L1-3 + PV voltage/current (unlike the hybrid raiprogramming_pv,
+# which uses pv_active_power). Diagram vocabulary (sri4all / sri4pv).
+#
+# Note: "Active power" on a PV inverter is production; attaching a
+# sri4all:FlowDirection (production) needs a mapper feature to link a fixed
+# individual -> tracked separately.
+
+prefixes:
+  sri4all: "https://w3id.org/resonance/SRI4ALL#"
+  sri4pv: "https://w3id.org/resonance/SRI4PV#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  unit: "http://qudt.org/vocab/unit/"
+
+match:
+  required_fields:
+    - resource_id
+    - active_power.value
+    - pv_voltage.value
+
+resource:
+  id_path: resource_id
+  class: {prefix: sri4pv, name: Photovoltaic}
+
+measurements:
+  - path: active_power.value
+    class: {prefix: sri4all, name: PowerMeasurement}
+    relation: {prefix: sri4all, name: hasPowerMeasurement}
+    datatype: float
+    unit_path: active_power.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+    property: {prefix: sri4all, name: ActivePower}
+    property_relation: {prefix: sri4all, name: hasPowerProperty}
+
+  # AC side
+  - {path: ac_voltage_l1.value, class: {prefix: sri4all, name: Voltage}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: ac_voltage_l1.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: ac_voltage_l2.value, class: {prefix: sri4all, name: Voltage}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: ac_voltage_l2.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: ac_voltage_l3.value, class: {prefix: sri4all, name: Voltage}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: ac_voltage_l3.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: ac_current_l1.value, class: {prefix: sri4all, name: Current}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: ac_current_l1.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: ac_current_l2.value, class: {prefix: sri4all, name: Current}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: ac_current_l2.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: ac_current_l3.value, class: {prefix: sri4all, name: Current}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: ac_current_l3.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+
+  # DC / PV side
+  - {path: pv_voltage.value, class: {prefix: sri4all, name: Voltage}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: pv_voltage.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: pv_current.value, class: {prefix: sri4all, name: Current}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: pv_current.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+
+  # Energy
+  - {path: export_active_energy.value, class: {prefix: sri4all, name: EnergyMeasurement}, relation: {prefix: sri4all, name: hasEnergyMeasurement}, datatype: float, unit_path: export_active_energy.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}

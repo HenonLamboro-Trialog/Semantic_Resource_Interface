@@ -2,3 +2,4 @@ streamlit
 streamlit-autorefresh
 paho-mqtt
 rdflib
+pyyaml

@@ -1,0 +1,77 @@
+schema_name: raiprogramming_pv
+
+# PV / hybrid-inverter snapshot (e.g. HYBRID_DEYE_HYBRID_3P_HV) from
+# adapters/raiprogramming/source.py. Diagram vocabulary (sri4all). Active power
+# -> PowerMeasurement (+ ActivePower); voltage/current -> Voltage/Current;
+# energy -> EnergyMeasurement. State-of-charge has no ontology class -> omitted.
+
+prefixes:
+  sri4all: "https://w3id.org/resonance/SRI4ALL#"
+  sri4pv: "https://w3id.org/resonance/SRI4PV#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  unit: "http://qudt.org/vocab/unit/"
+
+match:
+  required_fields:
+    - resource_id
+    - pv_active_power.value
+
+resource:
+  id_path: resource_id
+  class: {prefix: sri4pv, name: Photovoltaic}
+
+measurements:
+  # --- Power (active, with an ActivePower property) ---------------------
+  - path: pv_active_power.value
+    class: {prefix: sri4all, name: PowerMeasurement}
+    relation: {prefix: sri4all, name: hasPowerMeasurement}
+    datatype: float
+    unit_path: pv_active_power.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+    property: {prefix: sri4all, name: ActivePower}
+    property_relation: {prefix: sri4all, name: hasPowerProperty}
+  - path: inverter_active_power.value
+    class: {prefix: sri4all, name: PowerMeasurement}
+    relation: {prefix: sri4all, name: hasPowerMeasurement}
+    datatype: float
+    unit_path: inverter_active_power.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+    property: {prefix: sri4all, name: ActivePower}
+    property_relation: {prefix: sri4all, name: hasPowerProperty}
+  - path: grid_active_power.value
+    class: {prefix: sri4all, name: PowerMeasurement}
+    relation: {prefix: sri4all, name: hasPowerMeasurement}
+    datatype: float
+    unit_path: grid_active_power.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+    property: {prefix: sri4all, name: ActivePower}
+    property_relation: {prefix: sri4all, name: hasPowerProperty}
+  - path: battery_active_power.value
+    class: {prefix: sri4all, name: PowerMeasurement}
+    relation: {prefix: sri4all, name: hasPowerMeasurement}
+    datatype: float
+    unit_path: battery_active_power.unit
+    unit_prefix: unit
+    timestamp_path: timestamp
+    timestamp_datatype: dateTime
+    property: {prefix: sri4all, name: ActivePower}
+    property_relation: {prefix: sri4all, name: hasPowerProperty}
+
+  # --- Voltage ----------------------------------------------------------
+  - {path: pv_voltage.value,      class: {prefix: sri4all, name: Voltage}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: pv_voltage.unit,      unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: battery_voltage.value, class: {prefix: sri4all, name: Voltage}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: battery_voltage.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+
+  # --- Current ----------------------------------------------------------
+  - {path: pv_current.value,      class: {prefix: sri4all, name: Current}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: pv_current.unit,      unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: battery_current.value, class: {prefix: sri4all, name: Current}, relation: {prefix: sri4all, name: hasMeasurement}, datatype: float, unit_path: battery_current.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+
+  # --- Energy -----------------------------------------------------------
+  - {path: pv_export_active_energy.value,   class: {prefix: sri4all, name: EnergyMeasurement}, relation: {prefix: sri4all, name: hasEnergyMeasurement}, datatype: float, unit_path: pv_export_active_energy.unit,   unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: grid_import_active_energy.value, class: {prefix: sri4all, name: EnergyMeasurement}, relation: {prefix: sri4all, name: hasEnergyMeasurement}, datatype: float, unit_path: grid_import_active_energy.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}
+  - {path: grid_export_active_energy.value, class: {prefix: sri4all, name: EnergyMeasurement}, relation: {prefix: sri4all, name: hasEnergyMeasurement}, datatype: float, unit_path: grid_export_active_energy.unit, unit_prefix: unit, timestamp_path: timestamp, timestamp_datatype: dateTime}

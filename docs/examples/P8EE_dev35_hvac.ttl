@@ -1,0 +1,47 @@
+@prefix resource: <http://w3id.org/resonance/resource/> .
+@prefix sri4all: <https://w3id.org/resonance/SRI4ALL#> .
+@prefix sri4building: <https://w3id.org/resonance/SRI4Building#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+resource:PE7W-G97K-HWKP-P8EE_35 a sri4building:HeatPump ;
+    sri4all:hasPowerMeasurement resource:PE7W-G97K-HWKP-P8EE_35_import_active_power_value ;
+    sri4all:hasTemperatureMeasurement resource:PE7W-G97K-HWKP-P8EE_35_h_c_1_room_temp_value,
+        resource:PE7W-G97K-HWKP-P8EE_35_outdoor_temp_value,
+        resource:PE7W-G97K-HWKP-P8EE_35_return_temp_value,
+        resource:PE7W-G97K-HWKP-P8EE_35_sanitary_water_temp_value,
+        resource:PE7W-G97K-HWKP-P8EE_35_supply_temp_value .
+
+resource:PE7W-G97K-HWKP-P8EE_35_h_c_1_room_temp_value a sri4all:TemperatureMeasurement ;
+    sri4all:hasUnitOfMeasurment unit:DEG_C ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "23.978082191780825"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_35_import_active_power_value a sri4all:PowerMeasurement ;
+    sri4all:hasPowerProperty resource:PE7W-G97K-HWKP-P8EE_35_import_active_power_value_property ;
+    sri4all:hasUnitOfMeasurment unit:W ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "0.0"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_35_import_active_power_value_property a sri4all:ActivePower .
+
+resource:PE7W-G97K-HWKP-P8EE_35_outdoor_temp_value a sri4all:TemperatureMeasurement ;
+    sri4all:hasUnitOfMeasurment unit:DEG_C ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "19.224657534246578"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_35_return_temp_value a sri4all:TemperatureMeasurement ;
+    sri4all:hasUnitOfMeasurment unit:DEG_C ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "26.8"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_35_sanitary_water_temp_value a sri4all:TemperatureMeasurement ;
+    sri4all:hasUnitOfMeasurment unit:DEG_C ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "42.8"^^xsd:float .
+
+resource:PE7W-G97K-HWKP-P8EE_35_supply_temp_value a sri4all:TemperatureMeasurement ;
+    sri4all:hasUnitOfMeasurment unit:DEG_C ;
+    sri4all:timeStamp "2026-06-11T13:15:00"^^xsd:dateTime ;
+    sri4all:value "27.3"^^xsd:float .
+
