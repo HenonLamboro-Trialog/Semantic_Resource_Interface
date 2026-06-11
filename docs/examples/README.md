@@ -17,6 +17,9 @@ PYTHONPATH=.. python -m tools.convert --hems PE7W-G97K-HWKP-P8EE --device <id> [
 | `P8EE_dev82_charger.ttl` | 82 — OCPP EV charger | `raiprogramming_charger` | PowerDevice + active power + current + session energy |
 | `P8EE_dev116_sensor.ttl` | 116 — Shelly H&T | `raiprogramming_sensor` | saref:Sensor + TemperatureMeasurement + sri4weather:Humidity |
 
+| `P8EE_dev129_battery.ttl` | 129 — Deye hybrid (battery side) | `raiprogramming_battery` | sri4storage:Battery + StateOfCharge + Capacity + power/voltage/current |
+| `SolarEdge_7458_dev144_pv_string.ttl` | 144 — SolarEdge string inverter (hems 7458-…) | `raiprogramming_pv_string` | Photovoltaic + 3×AC + PV Voltage/Current + active power |
+
 EV chargers are modelled as `sri4all:PowerDevice` for now — the ontology has no
 EVSE/Connector/ChargingStation classes yet (SRI4EV would be a separate task).
 Device 342 (Vilion battery) exposes no numeric telemetry, so it has no example.
